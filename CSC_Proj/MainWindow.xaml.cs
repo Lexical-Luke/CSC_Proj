@@ -23,11 +23,15 @@ namespace CSC_Proj
         public MainWindow()
         {
             InitializeComponent();
+<<<<<<< HEAD
             //yoloswag 500
             //fuk u
             //suh
             //another one
             //another commit
+=======
+            //finally it works
+>>>>>>> origin/master
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
