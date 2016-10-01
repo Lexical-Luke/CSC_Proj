@@ -8,13 +8,17 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Win32;
+using DataFormats = System.Windows.DataFormats;
+using MessageBox = System.Windows.MessageBox;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using RichTextBox = System.Windows.Forms.RichTextBox;
+using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
 namespace CSC_Proj
 {
@@ -89,12 +93,12 @@ namespace CSC_Proj
         }
 
         private void MenuItem_Click_Open(object sender, RoutedEventArgs e)
-        {     
+        {
             // Create an instance of the open file dialog box.
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             // Set filter options and filter index.
-            openFileDialog1.Filter = "Text Files (.txt)|*.txt|Rich Text Files(.rtf)|*.rtf|All Files (*.*)|*.*";
+            openFileDialog1.Filter = "Text Files (.txt)|*.txt|Rich Text Files(.rtf)|*.rtf";
             //openFileDialog1.FilterIndex = 1;
             openFileDialog1.Title = "Open A file...";
 
@@ -108,25 +112,33 @@ namespace CSC_Proj
             if (userClickedOK == true)
             {
                 ////first clear the text box
-                //clear();
+                clear();
 
-                //// Open the selected file to read.
-                dynamic reader = new System.IO.StreamReader(openFileDialog1.FileName);
-                //MainTextBox.AppendText(reader.ReadToEnd()); //this works
-                ////var t = new TextRange(MainTextBox.Document.ContentStart, MainTextBox.Document.ContentEnd);
-                ////MainTextBox.AppendText(t.Text);
-                //reader.Close();
+                System.IO.FileStream fStream;
+                TextRange range;
 
-                //testing code
-                var document = new FlowDocument();//Read the file stream to a Byte array 'data'
 
-                using (var stream = new MemoryStream(reader))
+                if (System.IO.File.Exists(openFileDialog1.FileName))
                 {
-                    var txtRange = new TextRange(document.ContentStart, document.ContentEnd); // create a TextRange around the entire document
-                    txtRange.Load(stream, DataFormats.Rtf);
-                }
-            }
+                    range = new TextRange(MainTextBox.Document.ContentStart, MainTextBox.Document.ContentEnd);
+                    fStream = new System.IO.FileStream(openFileDialog1.FileName, System.IO.FileMode.OpenOrCreate);
+                    string format = "";
+                    
+                    if (openFileDialog1.FileName.EndsWith(".txt"))
+                    {
+                        format = DataFormats.Text;
+                    }
 
+                    else
+                    {
+                        format = DataFormats.Rtf;
+                    }
+
+                    range.Load(fStream, format);
+
+                    fStream.Close();
+                }
+            }        
         }
 
         #endregion
