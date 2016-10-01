@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Menu x:Name="menu" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Width="517">
+        <Menu x:Name="menu" Height="29" VerticalAlignment="Top" Margin="0,0,1.667,0">
             <MenuItem Header="File" Height="29" Width="36">
                 <MenuItem Header="New" HorizontalAlignment="Left" Width="142" Margin="0,0,-2,0"/>
                 <MenuItem Header="Save" Margin="0,0,-1,0">
