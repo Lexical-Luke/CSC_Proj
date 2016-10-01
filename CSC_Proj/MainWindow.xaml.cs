@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,6 +34,8 @@ namespace CSC_Proj
             //another one
             //another commit
 	//ben is here
+
+        //so is luke
 =======
             //finally it works
 >>>>>>> origin/master
