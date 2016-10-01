@@ -37,13 +37,24 @@ namespace CSC_Proj
         //plz always stick to the same naming conventions, 
         //this is a big project.
 
-        #region File Menu Items
+        #region Program wide usefull methods
 
-        private void MenuItem_Click_New(object sender, RoutedEventArgs e)
+        //duh it clears the text box
+        private void clear()
         {
             MainTextBox.SelectAll();
 
             MainTextBox.Selection.Text = "";
+        }
+
+
+        #endregion
+
+        #region File Menu Items
+
+        private void MenuItem_Click_New(object sender, RoutedEventArgs e)
+        {
+            clear();
         }
 
         private void MenuItem_Click_Save(object sender, RoutedEventArgs e)
@@ -58,34 +69,32 @@ namespace CSC_Proj
         }
 
         private void MenuItem_Click_Open(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Open");
+        {     
+            // Create an instance of the open file dialog box.
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            //// Create an instance of the open file dialog box.
-            //OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
-            //// Set filter options and filter index.
-            //openFileDialog1.Filter = "Text Files (.txt)|*.txt|All Files (*.*)|*.*";
+            // Set filter options and filter index.
+            openFileDialog1.Filter = "Text Files (.txt)|*.txt|Rich Text Files(.rtf)|*.rtf|All Files (*.*)|*.*";
             //openFileDialog1.FilterIndex = 1;
+            openFileDialog1.Title = "Open A file...";
 
+            //if you want to select multiple files, but why?
             //openFileDialog1.Multiselect = true;
 
-            //// Call the ShowDialog method to show the dialog box.
-            //bool? userClickedOK = openFileDialog1.ShowDialog();           
+            // Call the ShowDialog method to show the dialog box.
+            bool? userClickedOK = openFileDialog1.ShowDialog();
 
-            //// Process input if the user clicked OK.
-            //if (userClickedOK == true)
-            //{
-            //    // Open the selected file to read.
-            //    System.IO.Stream fileStream = openFileDialog1.File.OpenRead();
+            // Process input if the user clicked OK.
+            if (userClickedOK == true)
+            {
+                //first clear the text box
+                clear();
 
-            //    using (System.IO.StreamReader reader = new System.IO.StreamReader(fileStream))
-            //    {
-            //        // Read the first line from the file and write it the textbox.
-            //        MainTextBox.AppendText(reader.ReadLine());
-            //    }
-            //    fileStream.Close();
-            //}
+                // Open the selected file to read.
+                System.IO.StreamReader reader = new System.IO.StreamReader(openFileDialog1.FileName);
+                MainTextBox.AppendText(reader.ReadToEnd());
+                reader.Close();
+            }
 
         }
 
