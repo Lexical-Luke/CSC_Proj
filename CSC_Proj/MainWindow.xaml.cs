@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using RichTextBox = System.Windows.Forms.RichTextBox;
 
 namespace CSC_Proj
 {
@@ -81,7 +82,7 @@ namespace CSC_Proj
                 string rtfBox = MainTextBox.Selection.Text;
 
                 System.IO.StreamWriter saveWrite = new StreamWriter(saveFile.FileName);
-                //saveWrite.Write(MainTextBox.Document.ContentStart);
+                //saveWrite.Write(MainTextBox.Document.ContentStart);       Doesn't really work should though
                 saveWrite.Write(rtfBox);
                 saveWrite.Close();
             }
@@ -106,15 +107,24 @@ namespace CSC_Proj
             // Process input if the user clicked OK.
             if (userClickedOK == true)
             {
-                //first clear the text box
-                clear();
+                ////first clear the text box
+                //clear();
 
-                // Open the selected file to read.
-                System.IO.StreamReader reader = new System.IO.StreamReader(openFileDialog1.FileName);
-                MainTextBox.AppendText(reader.ReadToEnd());
-                //var t = new TextRange(MainTextBox.Document.ContentStart, MainTextBox.Document.ContentEnd);
-                //MainTextBox.AppendText(t.Text);
-                reader.Close();
+                //// Open the selected file to read.
+                dynamic reader = new System.IO.StreamReader(openFileDialog1.FileName);
+                //MainTextBox.AppendText(reader.ReadToEnd()); //this works
+                ////var t = new TextRange(MainTextBox.Document.ContentStart, MainTextBox.Document.ContentEnd);
+                ////MainTextBox.AppendText(t.Text);
+                //reader.Close();
+
+                //testing code
+                var document = new FlowDocument();//Read the file stream to a Byte array 'data'
+
+                using (var stream = new MemoryStream(reader))
+                {
+                    var txtRange = new TextRange(document.ContentStart, document.ContentEnd); // create a TextRange around the entire document
+                    txtRange.Load(stream, DataFormats.Rtf);
+                }
             }
 
         }

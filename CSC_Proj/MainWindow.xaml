@@ -15,7 +15,7 @@
                     <MenuItem Header="Save" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Save"/>
                     <MenuItem Header="Save As" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_SaveAs"/>
                 </MenuItem>
-                
+
             </MenuItem>
             <MenuItem Header="Edit">
                 <MenuItem Header="Undo" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Undo"/>
