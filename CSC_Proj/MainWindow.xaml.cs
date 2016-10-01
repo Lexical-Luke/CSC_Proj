@@ -41,12 +41,15 @@ namespace CSC_Proj
 
         private void MenuItem_Click_New(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("New");
+            MainTextBox.SelectAll();
+
+            MainTextBox.Selection.Text = "";
         }
 
         private void MenuItem_Click_Save(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Save");
+
         }
 
         private void MenuItem_Click_SaveAs(object sender, RoutedEventArgs e)
@@ -58,42 +61,57 @@ namespace CSC_Proj
         {
             MessageBox.Show("Open");
 
-            // Create an instance of the open file dialog box.
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            //// Create an instance of the open file dialog box.
+            //OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            // Set filter options and filter index.
-            openFileDialog1.Filter = "Text Files (.txt)|*.txt|All Files (*.*)|*.*";
-            openFileDialog1.FilterIndex = 1;
+            //// Set filter options and filter index.
+            //openFileDialog1.Filter = "Text Files (.txt)|*.txt|All Files (*.*)|*.*";
+            //openFileDialog1.FilterIndex = 1;
 
-            openFileDialog1.Multiselect = true;
+            //openFileDialog1.Multiselect = true;
 
-            // Call the ShowDialog method to show the dialog box.
-            bool? userClickedOK = openFileDialog1.ShowDialog();
+            //// Call the ShowDialog method to show the dialog box.
+            //bool? userClickedOK = openFileDialog1.ShowDialog();           
 
-            // Process input if the user clicked OK.
-            if (userClickedOK == true)
-            {
-                // Open the selected file to read.
-                System.IO.Stream fileStream = openFileDialog1.File.OpenRead();
+            //// Process input if the user clicked OK.
+            //if (userClickedOK == true)
+            //{
+            //    // Open the selected file to read.
+            //    System.IO.Stream fileStream = openFileDialog1.File.OpenRead();
 
-                using (System.IO.StreamReader reader = new System.IO.StreamReader(fileStream))
-                {
-                    // Read the first line from the file and write it the textbox.
-                    MainTextBox.AppendText(reader.ReadLine());
-                }
-                fileStream.Close();
-            }
+            //    using (System.IO.StreamReader reader = new System.IO.StreamReader(fileStream))
+            //    {
+            //        // Read the first line from the file and write it the textbox.
+            //        MainTextBox.AppendText(reader.ReadLine());
+            //    }
+            //    fileStream.Close();
+            //}
 
         }
 
         #endregion
 
+        #region Edit Menu Items
+
+        private void MenuItem_Click_Undo(object sender, RoutedEventArgs e)
+        {
+            MainTextBox.Undo();
+        }
+
+        private void MenuItem_Click_Redo(object sender, RoutedEventArgs e)
+        {
+            MainTextBox.Redo();
+        }
+
+        #endregion
+
         #region View Menu Items
-        
+
 
         private void MenuItem_Click_Font(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Font");
+            
         }
 
         private void MenuItem_Click_Size(object sender, RoutedEventArgs e)

@@ -10,15 +10,16 @@
         <Menu x:Name="menu" Height="29" VerticalAlignment="Top" Margin="0,0,1.667,0">
             <MenuItem Header="File" Height="29" Width="36">
                 <MenuItem Header="New" HorizontalAlignment="Left" Width="142" Margin="0,0,-2,0" Click="MenuItem_Click_New"/>
+                <MenuItem Header="Open " HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Open"/>
                 <MenuItem Header="Save" Margin="0,0,-1,0" >
                     <MenuItem Header="Save" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Save"/>
                     <MenuItem Header="Save As" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_SaveAs"/>
                 </MenuItem>
-                <MenuItem Header="Open " HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Open"/>
+                
             </MenuItem>
             <MenuItem Header="Edit">
-                <MenuItem Header="Undo" HorizontalAlignment="Left" Width="140"/>
-                <MenuItem Header="Redo" HorizontalAlignment="Left" Width="140"/>
+                <MenuItem Header="Undo" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Undo"/>
+                <MenuItem Header="Redo" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Redo"/>
                 <MenuItem Header="Cut" HorizontalAlignment="Left" Width="140"/>
                 <MenuItem Header="Copy" HorizontalAlignment="Left" Width="140"/>
                 <MenuItem Header="Paste" HorizontalAlignment="Left" Width="140"/>
