@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,12 +61,25 @@ namespace CSC_Proj
         private void MenuItem_Click_Save(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Save");
-
         }
 
         private void MenuItem_Click_SaveAs(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Save As");
+
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.Filter = "Text Files (.txt)|*.txt|Rich Text Files(.rtf)|*.rtf|All Files (*.*)|*.*";
+            saveFile.Title = "Save file...";
+
+            // Call the ShowDialog method to show the dialog box.
+            bool? userClickedOK = saveFile.ShowDialog();
+
+            if (userClickedOK == true)
+            {
+                System.IO.StreamWriter saveWrite = new StreamWriter(saveFile.FileName);
+                saveWrite.Write(MainTextBox.Document.ContentStart);
+                saveWrite.Close();
+            }
         }
 
         private void MenuItem_Click_Open(object sender, RoutedEventArgs e)
@@ -93,6 +107,8 @@ namespace CSC_Proj
                 // Open the selected file to read.
                 System.IO.StreamReader reader = new System.IO.StreamReader(openFileDialog1.FileName);
                 MainTextBox.AppendText(reader.ReadToEnd());
+                //var t = new TextRange(MainTextBox.Document.ContentStart, MainTextBox.Document.ContentEnd);
+                //MainTextBox.AppendText(t.Text);
                 reader.Close();
             }
 
