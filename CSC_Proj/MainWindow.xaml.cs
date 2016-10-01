@@ -43,6 +43,9 @@ namespace CSC_Proj
         //plz always stick to the same naming conventions, 
         //this is a big project.
 
+
+
+        //Add usefull multiuse features here.
         #region Program wide usefull methods
 
         //duh it clears the text box
@@ -56,6 +59,9 @@ namespace CSC_Proj
 
         #endregion
 
+        //Todo fix save as for rtf and make save 
+        //*The rtf might not be as broken as I think because it can still load rtf files saved by the text editor*
+        //Other text editors just cant open them
         #region File Menu Items
 
         private void MenuItem_Click_New(object sender, RoutedEventArgs e)
@@ -113,6 +119,7 @@ namespace CSC_Proj
             }
         }
 
+        //done
         private void MenuItem_Click_Open(object sender, RoutedEventArgs e)
         {
             // Create an instance of the open file dialog box.
@@ -120,16 +127,13 @@ namespace CSC_Proj
 
             // Set filter options and filter index.
             openFileDialog1.Filter = "Text Files (.txt)|*.txt|Rich Text Files(.rtf)|*.rtf";
-            //openFileDialog1.FilterIndex = 1;
+            openFileDialog1.FilterIndex = 1;
             openFileDialog1.Title = "Open A file...";
 
-            //if you want to select multiple files, but why?
-            //openFileDialog1.Multiselect = true;
-
-            // Call the ShowDialog method to show the dialog box.
+            //Call the ShowDialog method to show the dialog box.
             bool? userClickedOK = openFileDialog1.ShowDialog();
 
-            // Process input if the user clicked OK.
+            //Process input if the user clicked OK.
             if (userClickedOK == true)
             {
                 ////first clear the text box
@@ -164,6 +168,7 @@ namespace CSC_Proj
 
         #endregion
 
+        //Done
         #region Edit Menu Items
 
         private void MenuItem_Click_Undo(object sender, RoutedEventArgs e)
@@ -176,8 +181,32 @@ namespace CSC_Proj
             MainTextBox.Redo();
         }
 
+        private void MenuItem_Click_Cut(object sender, RoutedEventArgs e)
+        {
+            MainTextBox.Cut();
+        }
+
+        private void MenuItem_Click_Copy(object sender, RoutedEventArgs e)
+        {
+            MainTextBox.Copy();
+        }
+
+        private void MenuItem_Click_Paste(object sender, RoutedEventArgs e)
+        {
+            MainTextBox.Paste();
+        }
+
+        private void MenuItem_Click_SelectAll(object sender, RoutedEventArgs e)
+        {
+            MainTextBox.SelectAll();
+        }
         #endregion
 
+        //Todo, well there is nothing todo
+        #region Insert Menu Items
+        #endregion
+
+        //Todo all (Sven working on font)
         #region View Menu Items
 
 
@@ -199,6 +228,10 @@ namespace CSC_Proj
 
         #endregion
 
-        
+        //Todo, well there is nothing todo
+        #region Review Menu Items
+        #endregion
+
+
     }
 }
