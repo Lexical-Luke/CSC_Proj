@@ -70,8 +70,6 @@ namespace CSC_Proj
 
         private void MenuItem_Click_SaveAs(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Save As");
-
             SaveFileDialog saveFile = new SaveFileDialog();
             saveFile.Filter = "Text Files (.txt)|*.txt|Rich Text Files(.rtf)|*.rtf|All Files (*.*)|*.*";
             saveFile.Title = "Save file...";
@@ -82,11 +80,34 @@ namespace CSC_Proj
             if (userClickedOK == true)
             {
                 //because rtf.Text isn't a thing
+                //copies the enitre richtextbox and then saves it as rtfBox because you can't do mainTexBox.Text
                 MainTextBox.SelectAll();
                 string rtfBox = MainTextBox.Selection.Text;
 
                 System.IO.StreamWriter saveWrite = new StreamWriter(saveFile.FileName);
                 //saveWrite.Write(MainTextBox.Document.ContentStart);       Doesn't really work should though
+
+
+                //copied code
+
+                //System.IO.FileStream fStream;
+                //TextRange range;
+
+
+                //range = new TextRange(MainTextBox.Document.ContentStart, MainTextBox.Document.ContentEnd);
+                //fStream = new System.IO.FileStream(saveFile.FileName, System.IO.FileMode.OpenOrCreate);
+                //string format = "";
+
+                //if (saveFile.Filter == ".txt")
+                //{
+                ////   format = DataFormats.Rtf;
+                //     MainTextBox.SaveFile(saveFile.FileName, RichTextBoxStreamType.PlainText);
+                //}
+
+                //range.Load(fStream, format);
+
+                //end coppied code
+
                 saveWrite.Write(rtfBox);
                 saveWrite.Close();
             }
