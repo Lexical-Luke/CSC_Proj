@@ -22,29 +22,12 @@ namespace CSC_Proj
     {
         public MainWindow()
         {
-<<<<<<< HEAD
             InitializeComponent();
-//syhhhh
-=======
-            InitializeComponent();
-<<<<<<< HEAD
-            //yoloswag 500
-            //fuk u
-            //suh
-            //another one
-            //another commit
-	//ben is here
-
-        //so is luke
-=======
-            //finally it works
->>>>>>> origin/master
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
 
->>>>>>> d922e23239dce1c644f8cf29d10f9a5acd212483
         }
     }
 }

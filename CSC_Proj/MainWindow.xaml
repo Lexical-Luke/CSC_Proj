@@ -32,6 +32,13 @@
             </MenuItem>
             <MenuItem Header="Review"/>
         </Menu>
+        <RichTextBox x:Name="MainTextBox" Margin="2,29,1.667,-0.333">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="This text box is a rich text box"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
 
     </Grid>
 </Window>
