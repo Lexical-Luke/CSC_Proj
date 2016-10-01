@@ -56,6 +56,30 @@ namespace CSC_Proj
             MainTextBox.Selection.Text = "";
         }
 
+        //private void ToggleBold()
+        //{
+        //    if (MainTextBox. != null)
+        //    {
+        //        System.Drawing.Font currentFont = MainTextBox.SelectionFont;
+        //        System.Drawing.FontStyle newFontStyle;
+
+        //        if (richTextBox1.SelectionFont.Bold == true)
+        //        {
+        //            newFontStyle = FontStyle.Regular;
+        //        }
+        //        else
+        //        {
+        //            newFontStyle = FontStyle.Bold;
+        //        }
+
+        //        richTextBox1.SelectionFont = new Font(
+        //           currentFont.FontFamily,
+        //           currentFont.Size,
+        //           newFontStyle
+        //        );
+        //    }
+        //}
+
 
         #endregion
 
@@ -113,7 +137,7 @@ namespace CSC_Proj
                 //range.Load(fStream, format);
 
                 //end coppied code
-
+                
                 saveWrite.Write(rtfBox);
                 saveWrite.Close();
             }
@@ -141,7 +165,6 @@ namespace CSC_Proj
 
                 System.IO.FileStream fStream;
                 TextRange range;
-
 
                 if (System.IO.File.Exists(openFileDialog1.FileName))
                 {
@@ -206,14 +229,13 @@ namespace CSC_Proj
         #region Insert Menu Items
         #endregion
 
-        //Todo all (Sven working on font)
-        #region View Menu Items
+        //Todo all. (Sven working on font)
+        #region Format Menu Items
 
 
         private void MenuItem_Click_Font(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Font");
-            
+            MessageBox.Show("Font");     
         }
 
         private void MenuItem_Click_Size(object sender, RoutedEventArgs e)
@@ -224,6 +246,18 @@ namespace CSC_Proj
         private void MenuItem_Click_Colour(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Colour");
+        }
+
+        private void MenuItem_Click_Lower(object sender, RoutedEventArgs e)
+        {
+            string rtfBox = MainTextBox.Selection.Text;
+            MainTextBox.Selection.Text = rtfBox.ToLower();
+        }
+
+        private void MenuItem_Click_Upper(object sender, RoutedEventArgs e)
+        {
+            string rtfBox = MainTextBox.Selection.Text;
+            MainTextBox.Selection.Text = rtfBox.ToUpper(); ;
         }
 
         #endregion

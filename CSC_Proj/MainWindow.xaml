@@ -24,12 +24,15 @@
                 <MenuItem Header="Copy" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Copy" />
                 <MenuItem Header="Paste" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Paste" />
                 <MenuItem Header="Select All" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_SelectAll" />
+
             </MenuItem>
             <MenuItem Header="Insert"/>
-            <MenuItem Header="View">
+            <MenuItem Header="Format">
                 <MenuItem Header="Font" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Font"/>
                 <MenuItem Header="Size" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Size"/>
                 <MenuItem Header="Colour" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Colour"/>
+                <MenuItem Header="To Lowercase" HorizontalAlignment="Left" Width="164" Click="MenuItem_Click_Lower" Margin="0,0,-24,0"/>
+                <MenuItem Header="To Uppercase" HorizontalAlignment="Left" Width="163" Click="MenuItem_Click_Upper" Margin="0,0,-23,0"/>
             </MenuItem>
             <MenuItem Header="Review"/>
         </Menu>
