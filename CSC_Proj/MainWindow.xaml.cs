@@ -24,6 +24,7 @@ namespace CSC_Proj
         {
             InitializeComponent();
             //yoloswag 500
+            //fuk u
             //suh
             //another one
         }
