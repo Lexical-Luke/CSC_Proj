@@ -28,5 +28,10 @@ namespace CSC_Proj
             //suh
             //another one
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

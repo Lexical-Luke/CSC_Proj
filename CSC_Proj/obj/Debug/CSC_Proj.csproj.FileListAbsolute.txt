@@ -1,3 +1,16 @@
 \\mac\home\documents\visual studio 2015\Projects\CSC_Proj\CSC_Proj\bin\Debug\CSC_Proj.exe.config
 \\Mac\Home\Documents\University\Comp Sci\Group Project\CSC_Proj\CSC_Proj\bin\Debug\CSC_Proj.exe.config
 D:\Users\Desktop\UNI\Com sci Prac\CSC\Semester 2\CSC_Proj\CSC_Proj\bin\Debug\CSC_Proj.exe.config
+D:\Users\Desktop\UNI\Com sci Prac\CSC\Semester 2\CSC_Proj\CSC_Proj\obj\Debug\CSC_Proj.csprojResolveAssemblyReference.cache
+D:\Users\Desktop\UNI\Com sci Prac\CSC\Semester 2\CSC_Proj\CSC_Proj\obj\Debug\MainWindow.g.cs
+D:\Users\Desktop\UNI\Com sci Prac\CSC\Semester 2\CSC_Proj\CSC_Proj\obj\Debug\App.g.cs
+D:\Users\Desktop\UNI\Com sci Prac\CSC\Semester 2\CSC_Proj\CSC_Proj\obj\Debug\CSC_Proj_MarkupCompile.cache
+D:\Users\Desktop\UNI\Com sci Prac\CSC\Semester 2\CSC_Proj\CSC_Proj\obj\Debug\CSC_Proj_MarkupCompile.lref
+D:\Users\Desktop\UNI\Com sci Prac\CSC\Semester 2\CSC_Proj\CSC_Proj\bin\Debug\CSC_Proj.exe
+D:\Users\Desktop\UNI\Com sci Prac\CSC\Semester 2\CSC_Proj\CSC_Proj\bin\Debug\CSC_Proj.pdb
+D:\Users\Desktop\UNI\Com sci Prac\CSC\Semester 2\CSC_Proj\CSC_Proj\obj\Debug\MainWindow.baml
+D:\Users\Desktop\UNI\Com sci Prac\CSC\Semester 2\CSC_Proj\CSC_Proj\obj\Debug\CSC_Proj.g.resources
+D:\Users\Desktop\UNI\Com sci Prac\CSC\Semester 2\CSC_Proj\CSC_Proj\obj\Debug\CSC_Proj.Properties.Resources.resources
+D:\Users\Desktop\UNI\Com sci Prac\CSC\Semester 2\CSC_Proj\CSC_Proj\obj\Debug\CSC_Proj.csproj.GenerateResource.Cache
+D:\Users\Desktop\UNI\Com sci Prac\CSC\Semester 2\CSC_Proj\CSC_Proj\obj\Debug\CSC_Proj.exe
+D:\Users\Desktop\UNI\Com sci Prac\CSC\Semester 2\CSC_Proj\CSC_Proj\obj\Debug\CSC_Proj.pdb
