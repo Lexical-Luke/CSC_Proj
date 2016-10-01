@@ -23,6 +23,9 @@ namespace CSC_Proj
         public MainWindow()
         {
             InitializeComponent();
+            //yoloswag 500
+            //suh
+            //another one
         }
     }
 }

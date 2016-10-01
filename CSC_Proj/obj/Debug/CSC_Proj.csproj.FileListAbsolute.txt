@@ -1,1 +1,2 @@
 \\mac\home\documents\visual studio 2015\Projects\CSC_Proj\CSC_Proj\bin\Debug\CSC_Proj.exe.config
+\\Mac\Home\Documents\University\Comp Sci\Group Project\CSC_Proj\CSC_Proj\bin\Debug\CSC_Proj.exe.config
