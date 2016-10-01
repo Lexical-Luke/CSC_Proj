@@ -76,8 +76,13 @@ namespace CSC_Proj
 
             if (userClickedOK == true)
             {
+                //because rtf.Text isn't a thing
+                MainTextBox.SelectAll();
+                string rtfBox = MainTextBox.Selection.Text;
+
                 System.IO.StreamWriter saveWrite = new StreamWriter(saveFile.FileName);
-                saveWrite.Write(MainTextBox.Document.ContentStart);
+                //saveWrite.Write(MainTextBox.Document.ContentStart);
+                saveWrite.Write(rtfBox);
                 saveWrite.Close();
             }
         }
