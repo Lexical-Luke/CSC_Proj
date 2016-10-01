@@ -25,9 +25,19 @@ namespace CSC_Proj
             InitializeComponent();
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_Click_Font(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("Font");
+        }
 
+        private void MenuItem_Click_Size(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Size");
+        }
+
+        private void MenuItem_Click_Colour(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Colour");
         }
     }
 }

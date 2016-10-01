@@ -26,13 +26,13 @@
             </MenuItem>
             <MenuItem Header="Insert"/>
             <MenuItem Header="View">
-                <MenuItem Header="Font" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click"/>
-                <MenuItem Header="Size" HorizontalAlignment="Left" Width="140"/>
-                <MenuItem Header="Color" HorizontalAlignment="Left" Width="140"/>
+                <MenuItem Header="Font" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Font"/>
+                <MenuItem Header="Size" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Size"/>
+                <MenuItem Header="Colour" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Colour"/>
             </MenuItem>
             <MenuItem Header="Review"/>
         </Menu>
-        <RichTextBox x:Name="MainTextBox" Margin="2,29,1.667,-0.333">
+        <RichTextBox x:Name="MainTextBox" Margin="2,29,1.667,1.667">
             <FlowDocument>
                 <Paragraph>
                     <Run Text="This text box is a rich text box"/>
