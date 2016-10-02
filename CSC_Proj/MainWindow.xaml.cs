@@ -31,11 +31,7 @@ namespace CSC_Proj
         public MainWindow()
         {
             InitializeComponent();
-            //foreach (System.Reflection.PropertyInfo prop in typeof(System.Drawing.Color).GetProperties())
-            //{
-            //    if (prop.PropertyType.FullName == "System.Drawing.Color")
-            //        colorBox.Items.Add(prop.Name);
-            //}
+            MainTextBox.SpellCheck.IsEnabled = true;
         }
 
         //**Adding menu item functionality**
@@ -222,7 +218,7 @@ namespace CSC_Proj
                 string fontStyle = Convert.ToString(openFontDialog1.Font.Style);
                 bool underline = openFontDialog1.Font.Underline;
                 bool strikeout = openFontDialog1.Font.Strikeout;
-                //MessageBox.Show(Convert.ToString(openFontDialog1.Font.Strikeout));
+                
                 fontName = openFontDialog1.Font.Name;
                 fontSize = openFontDialog1.Font.Size;
 
@@ -230,7 +226,7 @@ namespace CSC_Proj
 
                 //MainTextBox.FontSize = fontSize;
                 //MainTextBox. = fontName;             
-                //MainTextBox.SelectionFont = new Font("Verdana", 12, FontStyle.Bold);
+                //MainTextBox.Selection.Text = new Font("Verdana", 12, fontStyle);
 
                 TextRange text = new TextRange(MainTextBox.Selection.Start, MainTextBox.Selection.End);     // selected text
 
@@ -263,7 +259,7 @@ namespace CSC_Proj
                 //                              Change style
 
                 if (fontStyle == "Italic")
-                    text.ApplyPropertyValue(Run.FontStyleProperty, FontStyles.Italic);
+                { text.ApplyPropertyValue(Run.FontStyleProperty, FontStyles.Italic); }
 
                 if (fontStyle == "Bold, Italic")
                 {
@@ -272,7 +268,7 @@ namespace CSC_Proj
                 }
 
                 if (fontStyle == "Bold")
-                    text.ApplyPropertyValue(Run.FontWeightProperty, FontWeights.Bold);
+                { text.ApplyPropertyValue(Run.FontWeightProperty, FontWeights.Bold); }
 
                 if (fontStyle == "Regular")
                 {
