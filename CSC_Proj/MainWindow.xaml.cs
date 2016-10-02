@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
 using DataFormats = System.Windows.DataFormats;
 using MessageBox = System.Windows.MessageBox;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
@@ -203,8 +204,84 @@ namespace CSC_Proj
 
         private void MenuItem_Click_Font(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Font");   
             
+            MainTextBox.Focus();
+            System.Windows.Forms.FontDialog openFontDialog1 = new System.Windows.Forms.FontDialog();
+
+            //bool? userClickedOK = openFontDialog1.ShowDialog();
+            //userClickedOK == true
+            if (openFontDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string fontName;
+                float fontSize;
+                string fontStyle = Convert.ToString(openFontDialog1.Font.Style);
+                bool underline = openFontDialog1.Font.Underline;
+                bool strikeout = openFontDialog1.Font.Strikeout;
+                //MessageBox.Show(Convert.ToString(openFontDialog1.Font.Strikeout));
+                fontName = openFontDialog1.Font.Name;
+                fontSize = openFontDialog1.Font.Size;
+
+                // fontStyle = openFontDialog1.Font.Style;
+
+                //MainTextBox.FontSize = fontSize;
+                //MainTextBox. = fontName;             
+                //MainTextBox.SelectionFont = new Font("Verdana", 12, FontStyle.Bold);
+
+                TextRange text = new TextRange(MainTextBox.Selection.Start, MainTextBox.Selection.End);
+
+
+                //                    Underline and crossthrough
+                if (underline)
+                {
+                    text.ApplyPropertyValue(Run.TextDecorationsProperty, TextDecorations.Underline);
+                }
+                if (strikeout)
+                {
+                    text.ApplyPropertyValue(Run.TextDecorationsProperty, TextDecorations.Strikethrough);
+                }
+
+                if (!strikeout && !underline)
+                { text.ApplyPropertyValue(Run.TextDecorationsProperty, null); }
+
+                if (strikeout && !underline)
+                {
+                    text.ApplyPropertyValue(Run.TextDecorationsProperty, null);
+                    text.ApplyPropertyValue(Run.TextDecorationsProperty, TextDecorations.Strikethrough);
+                }
+
+                if (!strikeout && underline)
+                {
+                    text.ApplyPropertyValue(Run.TextDecorationsProperty, null);
+                    text.ApplyPropertyValue(Run.TextDecorationsProperty, TextDecorations.Underline);
+                }
+
+                //                              Change style
+
+                if (fontStyle == "Italic")
+                    text.ApplyPropertyValue(Run.FontStyleProperty, FontStyles.Italic);
+
+                if (fontStyle == "Bold, Italic")
+                {
+                    text.ApplyPropertyValue(Run.FontStyleProperty, FontStyles.Oblique);
+                    text.ApplyPropertyValue(Run.FontWeightProperty, FontWeights.Bold);
+                }
+
+                if (fontStyle == "Bold")
+                    text.ApplyPropertyValue(Run.FontWeightProperty, FontWeights.Bold);
+
+                if (fontStyle == "Regular")
+                {
+                    text.ApplyPropertyValue(Run.FontStyleProperty, FontStyles.Normal);
+                    text.ApplyPropertyValue(Run.FontWeightProperty, FontWeights.Normal);
+                }
+
+                //              Change Color
+
+                System.Windows.Media.Color c = Colors.Red;
+                SolidColorBrush brush = new SolidColorBrush(c);
+
+                //text.ApplyPropertyValue(TextElement.ForegroundProperty, brush);
+            }
         }
 
         private void MenuItem_Click_Size(object sender, RoutedEventArgs e)
