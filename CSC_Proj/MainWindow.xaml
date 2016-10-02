@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSC_Proj"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="522">
     <Grid>
-        <Menu x:Name="menu" Height="29" VerticalAlignment="Top" Margin="0,0,1.667,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <Menu x:Name="menu" Height="29" VerticalAlignment="Top">
             <MenuItem Header="File" Height="29" Width="36">
                 <MenuItem Header="New" HorizontalAlignment="Left" Width="142" Margin="0,0,-2,0" Click="MenuItem_Click_New"/>
                 <MenuItem Header="Open " HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Open"/>
@@ -36,7 +40,7 @@
             </MenuItem>
             <MenuItem Header="Review"/>
         </Menu>
-        <RichTextBox x:Name="MainTextBox" Margin="2,29,1.667,1.667">
+        <RichTextBox x:Name="MainTextBox" Margin="2,29,0,1">
             <FlowDocument>
                 <Paragraph>
                     <Run Text="This text box is a rich text box"/>

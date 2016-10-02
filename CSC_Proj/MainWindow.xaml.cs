@@ -31,6 +31,11 @@ namespace CSC_Proj
         public MainWindow()
         {
             InitializeComponent();
+            //foreach (System.Reflection.PropertyInfo prop in typeof(System.Drawing.Color).GetProperties())
+            //{
+            //    if (prop.PropertyType.FullName == "System.Drawing.Color")
+            //        colorBox.Items.Add(prop.Name);
+            //}
         }
 
         //**Adding menu item functionality**
@@ -198,7 +203,7 @@ namespace CSC_Proj
         #region Insert Menu Items
         #endregion
         
-        //Todo all. (Sven working on font)
+        //Todo all. (Sven working on font)      ---> not finished
         #region Format Menu Items
 
 
@@ -227,7 +232,7 @@ namespace CSC_Proj
                 //MainTextBox. = fontName;             
                 //MainTextBox.SelectionFont = new Font("Verdana", 12, FontStyle.Bold);
 
-                TextRange text = new TextRange(MainTextBox.Selection.Start, MainTextBox.Selection.End);
+                TextRange text = new TextRange(MainTextBox.Selection.Start, MainTextBox.Selection.End);     // selected text
 
 
                 //                    Underline and crossthrough
@@ -275,12 +280,6 @@ namespace CSC_Proj
                     text.ApplyPropertyValue(Run.FontWeightProperty, FontWeights.Normal);
                 }
 
-                //              Change Color
-
-                System.Windows.Media.Color c = Colors.Red;
-                SolidColorBrush brush = new SolidColorBrush(c);
-
-                //text.ApplyPropertyValue(TextElement.ForegroundProperty, brush);
             }
         }
 
@@ -290,10 +289,28 @@ namespace CSC_Proj
             
         }
 
+        //                           Change Color
+
         private void MenuItem_Click_Colour(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Colour");
+            TextRange text = new TextRange(MainTextBox.Selection.Start, MainTextBox.Selection.End);     // selected text
+
+            System.Windows.Forms.ColorDialog ShowColorDialog = new System.Windows.Forms.ColorDialog();
+
+            if (ShowColorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                System.Drawing.Color c = ShowColorDialog.Color;
+
+                var drawingcolor = System.Windows.Media.Color.FromArgb(c.A, c.R, c.G, c.B);
+
+                SolidColorBrush brush = new SolidColorBrush(drawingcolor);
+
+                text.ApplyPropertyValue(TextElement.ForegroundProperty, brush);
+            }
+
         }
+
+
 
         private void MenuItem_Click_Lower(object sender, RoutedEventArgs e)
         {
@@ -313,5 +330,9 @@ namespace CSC_Proj
         #region Review Menu Items
         #endregion
 
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
