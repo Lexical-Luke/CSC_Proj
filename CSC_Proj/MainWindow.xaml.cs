@@ -46,9 +46,7 @@ namespace CSC_Proj
         //this is a big project.
 
 
-
-        //Add usefull multiuse features here and all global variables
-        #region Program wide usefull methods
+        #region Program wide usefull methods & global variables
 
         //duh it clears the text box
         private void clear()
@@ -62,8 +60,7 @@ namespace CSC_Proj
 
         #endregion
 
-        //Done
-        //Only other text editors just cant open the rtf files that get saved
+        //Done || Can still be inproved if anyone wants to give it a shot, work on shortcuts for save, new etc. alos the RTF save file
         #region File Menu Items
 
         private void MenuItem_Click_New(object sender, RoutedEventArgs e)
@@ -103,7 +100,6 @@ namespace CSC_Proj
                 string rtfBox = MainTextBox.Selection.Text;
 
                 System.IO.StreamWriter saveWrite = new StreamWriter(saveFile.FileName);
-                //saveWrite.Write(MainTextBox.Document.ContentStart);       Doesn't really work should though
 
                 filePath = saveFile.FileName;
 
@@ -160,6 +156,7 @@ namespace CSC_Proj
         }
 
         #endregion
+        //Only other text editors just cant open the rtf files that get saved
 
         //Done
         #region Edit Menu Items
@@ -195,11 +192,13 @@ namespace CSC_Proj
         }
         #endregion
 
-        //Todo, well there is nothing todo
+        //Todo, well there is nothing to do yet
         #region Insert Menu Items
+
+
         #endregion
         
-        //Todo all. (Sven working on font)      ---> not finished
+        //Todo all. (Sven working on font)      ---> not finished || Size and font still to be done. Colour bold underline etc work
         #region Format Menu Items
 
 
@@ -256,6 +255,7 @@ namespace CSC_Proj
                     text.ApplyPropertyValue(Run.TextDecorationsProperty, TextDecorations.Underline);
                 }
 
+
                 //                              Change style
 
                 if (fontStyle == "Italic")
@@ -281,8 +281,7 @@ namespace CSC_Proj
 
         private void MenuItem_Click_Size(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Size");
-            
+            MessageBox.Show("Size");           
         }
 
         //                           Change Color
@@ -306,8 +305,6 @@ namespace CSC_Proj
 
         }
 
-
-
         private void MenuItem_Click_Lower(object sender, RoutedEventArgs e)
         {
             string rtfBox = MainTextBox.Selection.Text;
@@ -322,13 +319,9 @@ namespace CSC_Proj
 
         #endregion
 
-        //Todo, well there is nothing todo
+        //Todo, well there is nothing to do yet
         #region Review Menu Items
         #endregion
 
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
