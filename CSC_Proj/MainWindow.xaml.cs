@@ -45,7 +45,7 @@ namespace CSC_Proj
 
 
 
-        //Add usefull multiuse features here.
+        //Add usefull multiuse features here and all global variables
         #region Program wide usefull methods
 
         //duh it clears the text box
@@ -56,36 +56,12 @@ namespace CSC_Proj
             MainTextBox.Selection.Text = "";
         }
 
-        //private void ToggleBold()
-        //{
-        //    if (MainTextBox. != null)
-        //    {
-        //        System.Drawing.Font currentFont = MainTextBox.SelectionFont;
-        //        System.Drawing.FontStyle newFontStyle;
-
-        //        if (richTextBox1.SelectionFont.Bold == true)
-        //        {
-        //            newFontStyle = FontStyle.Regular;
-        //        }
-        //        else
-        //        {
-        //            newFontStyle = FontStyle.Bold;
-        //        }
-
-        //        richTextBox1.SelectionFont = new Font(
-        //           currentFont.FontFamily,
-        //           currentFont.Size,
-        //           newFontStyle
-        //        );
-        //    }
-        //}
-
+        private string filePath = "";
 
         #endregion
 
-        //Todo fix save as for rtf and make save 
-        //*The rtf might not be as broken as I think because it can still load rtf files saved by the text editor*
-        //Other text editors just cant open them
+        //Done
+        //Only other text editors just cant open the rtf files that get saved
         #region File Menu Items
 
         private void MenuItem_Click_New(object sender, RoutedEventArgs e)
@@ -95,7 +71,17 @@ namespace CSC_Proj
 
         private void MenuItem_Click_Save(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Save");
+            MainTextBox.SelectAll();
+            string rtfBox = MainTextBox.Selection.Text;
+
+            System.IO.StreamWriter saveWrite = new StreamWriter(filePath);
+
+            saveWrite.Write(rtfBox);
+            saveWrite.Close();
+
+            //if you dont do this everything in the text box remains selected
+            MainTextBox.Copy();
+            MainTextBox.Paste();
         }
 
         private void MenuItem_Click_SaveAs(object sender, RoutedEventArgs e)
@@ -117,33 +103,13 @@ namespace CSC_Proj
                 System.IO.StreamWriter saveWrite = new StreamWriter(saveFile.FileName);
                 //saveWrite.Write(MainTextBox.Document.ContentStart);       Doesn't really work should though
 
+                filePath = saveFile.FileName;
 
-                //copied code
-
-                //System.IO.FileStream fStream;
-                //TextRange range;
-
-
-                //range = new TextRange(MainTextBox.Document.ContentStart, MainTextBox.Document.ContentEnd);
-                //fStream = new System.IO.FileStream(saveFile.FileName, System.IO.FileMode.OpenOrCreate);
-                //string format = "";
-
-                //if (saveFile.Filter == ".txt")
-                //{
-                ////   format = DataFormats.Rtf;
-                //     MainTextBox.SaveFile(saveFile.FileName, RichTextBoxStreamType.PlainText);
-                //}
-
-                //range.Load(fStream, format);
-
-                //end coppied code
-                
                 saveWrite.Write(rtfBox);
                 saveWrite.Close();
             }
         }
 
-        //done
         private void MenuItem_Click_Open(object sender, RoutedEventArgs e)
         {
             // Create an instance of the open file dialog box.
@@ -181,6 +147,8 @@ namespace CSC_Proj
                     {
                         format = DataFormats.Rtf;
                     }
+
+                    filePath = openFileDialog1.FileName;
 
                     range.Load(fStream, format);
 
@@ -228,19 +196,21 @@ namespace CSC_Proj
         //Todo, well there is nothing todo
         #region Insert Menu Items
         #endregion
-
+        
         //Todo all. (Sven working on font)
         #region Format Menu Items
 
 
         private void MenuItem_Click_Font(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Font");     
+            MessageBox.Show("Font");   
+            
         }
 
         private void MenuItem_Click_Size(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Size");
+            
         }
 
         private void MenuItem_Click_Colour(object sender, RoutedEventArgs e)
@@ -265,7 +235,6 @@ namespace CSC_Proj
         //Todo, well there is nothing todo
         #region Review Menu Items
         #endregion
-
 
     }
 }
