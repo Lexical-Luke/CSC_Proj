@@ -197,16 +197,17 @@ namespace CSC_Proj
 
 
         #endregion
-        
+
         //Todo all. (Sven working on font)      ---> not finished || Size and font still to be done. Colour bold underline etc work
         #region Format Menu Items
 
+        System.Windows.Forms.FontDialog openFontDialog1;
 
         private void MenuItem_Click_Font(object sender, RoutedEventArgs e)
         {
-            
+
             MainTextBox.Focus();
-            System.Windows.Forms.FontDialog openFontDialog1 = new System.Windows.Forms.FontDialog();
+            if (openFontDialog1 == null) openFontDialog1 = new System.Windows.Forms.FontDialog();    // keeps selected text style in font menu
 
             if (openFontDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -309,14 +310,14 @@ namespace CSC_Proj
 
         private void MenuItem_Click_Lower(object sender, RoutedEventArgs e)
         {
-            string rtfBox = MainTextBox.Selection.Text;
+            var rtfBox = MainTextBox.Selection.Text;
             MainTextBox.Selection.Text = rtfBox.ToLower();
         }
 
         private void MenuItem_Click_Upper(object sender, RoutedEventArgs e)
         {
-            string rtfBox = MainTextBox.Selection.Text;
-            MainTextBox.Selection.Text = rtfBox.ToUpper(); ;
+            var rtfBox = MainTextBox.Selection.Text;
+            MainTextBox.Selection.Text = rtfBox.ToUpper(); 
         }
 
         #endregion
