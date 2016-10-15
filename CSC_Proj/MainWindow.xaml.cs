@@ -208,8 +208,6 @@ namespace CSC_Proj
             MainTextBox.Focus();
             System.Windows.Forms.FontDialog openFontDialog1 = new System.Windows.Forms.FontDialog();
 
-            //bool? userClickedOK = openFontDialog1.ShowDialog();
-            //userClickedOK == true
             if (openFontDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string fontName;
@@ -220,12 +218,6 @@ namespace CSC_Proj
                 
                 fontName = openFontDialog1.Font.Name;
                 fontSize = openFontDialog1.Font.Size;
-
-                // fontStyle = openFontDialog1.Font.Style;
-
-                //MainTextBox.FontSize = fontSize;
-                //MainTextBox. = fontName;             
-                //MainTextBox.Selection.Text = new Font("Verdana", 12, fontStyle);
 
                 TextRange text = new TextRange(MainTextBox.Selection.Start, MainTextBox.Selection.End);     // selected text
 
@@ -275,6 +267,11 @@ namespace CSC_Proj
                     text.ApplyPropertyValue(Run.FontStyleProperty, FontStyles.Normal);
                     text.ApplyPropertyValue(Run.FontWeightProperty, FontWeights.Normal);
                 }
+
+
+                //                          Change font size
+
+                text.ApplyPropertyValue(TextElement.FontSizeProperty, (double)fontSize);
 
             }
         }
