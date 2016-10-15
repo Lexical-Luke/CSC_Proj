@@ -273,6 +273,11 @@ namespace CSC_Proj
 
                 text.ApplyPropertyValue(TextElement.FontSizeProperty, (double)fontSize);
 
+
+                //                          Change font Family
+
+                text.ApplyPropertyValue(TextElement.FontFamilyProperty, fontName);
+
             }
         }
 
