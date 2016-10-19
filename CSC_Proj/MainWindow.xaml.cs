@@ -328,6 +328,7 @@ namespace CSC_Proj
         //Todo, well there is nothing to do yet
         #region Review Menu Items
 
+        //Kati reeve did this
         private void MenuItem_Click_WordCount(object sender, RoutedEventArgs e)
         {
             MainTextBox.SelectAll();
