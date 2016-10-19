@@ -38,7 +38,9 @@
                 <MenuItem Header="To Lowercase" HorizontalAlignment="Left" Width="164" Click="MenuItem_Click_Lower" Margin="0,0,-24,0"/>
                 <MenuItem Header="To Uppercase" HorizontalAlignment="Left" Width="163" Click="MenuItem_Click_Upper" Margin="0,0,-23,0"/>
             </MenuItem>
-            <MenuItem Header="Review"/>
+            <MenuItem Header="Review">
+                <MenuItem Header="Word Count" HorizontalAlignment="Left" Width="150" Click="MenuItem_Click_WordCount"/>
+            </MenuItem>
         </Menu>
         <RichTextBox x:Name="MainTextBox" Margin="2,29,0,1">
             <FlowDocument>

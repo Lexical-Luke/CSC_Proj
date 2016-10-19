@@ -115,16 +115,16 @@ namespace CSC_Proj
 
             // Set filter options and filter index.
             openFileDialog1.Filter = "Text Files (.txt)|*.txt|Rich Text Files(.rtf)|*.rtf";
-            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.FilterIndex = 1;    //TBH not too sure what this does, but hey lets leave it
             openFileDialog1.Title = "Open A file...";
 
             //Call the ShowDialog method to show the dialog box.
-            bool? userClickedOK = openFileDialog1.ShowDialog();
+            bool? userClickedOK = openFileDialog1.ShowDialog();     //makes the if statement below easier 
 
             //Process input if the user clicked OK.
             if (userClickedOK == true)
             {
-                ////first clear the text box
+                //first clear the text box
                 clear();
 
                 System.IO.FileStream fStream;
@@ -136,16 +136,19 @@ namespace CSC_Proj
                     fStream = new System.IO.FileStream(openFileDialog1.FileName, System.IO.FileMode.OpenOrCreate);
                     string format = "";
                     
+                    //writes the data in the correct format for txt
                     if (openFileDialog1.FileName.EndsWith(".txt"))
                     {
                         format = DataFormats.Text;
                     }
 
+                    //writes the data in the correct format for rtf 
                     else
                     {
                         format = DataFormats.Rtf;
                     }
 
+                    //used for save/save as and finding the last path of a file to automatically write to the correct place.
                     filePath = openFileDialog1.FileName;
 
                     range.Load(fStream, format);
@@ -324,6 +327,23 @@ namespace CSC_Proj
 
         //Todo, well there is nothing to do yet
         #region Review Menu Items
+
+        private void MenuItem_Click_WordCount(object sender, RoutedEventArgs e)
+        {
+            MainTextBox.SelectAll();
+            string rtfBox = MainTextBox.Selection.Text;
+
+            //unhighlights all the text
+            MainTextBox.Copy();
+            MainTextBox.Paste();
+
+            string[] eh = null;
+
+            string[] words = rtfBox.Split(eh, StringSplitOptions.RemoveEmptyEntries);
+
+            MessageBox.Show(string.Format("There are {0} words in the file.", words.Length));
+        }
+
         #endregion
 
     }
