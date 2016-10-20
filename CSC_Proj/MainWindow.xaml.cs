@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -50,6 +52,48 @@ namespace CSC_Proj
         //plz always stick to the same naming conventions, 
         //this is a big project.
 
+        int lineCount = 1;
+        private void MainTextBox_keyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            var textRange = new TextRange(MainTextBox.Document.ContentStart, MainTextBox.Document.ContentEnd);
+            var b = 0;
+            TextPointer textPointer = MainTextBox.Selection.Start;
+            if (e.Key == Key.Return)
+            {
+                lineCount++;
+                b = 1;
+            }
+            if (e.Key == Key.Back && textPointer.GetTextInRun(LogicalDirection.Backward).LastOrDefault().GetHashCode() == 0)
+            {
+                lineCount--;
+                b = -1;
+            }
+
+            // back up code: 
+            //var t = textRange.Text.Where(x => x == '\n').Count();
+            if (b != 0)
+            {
+                //lineCount = t;
+                var sb = new StringBuilder();
+                //for (int i = 1; i <= lineCount; i++) sb.Append(i).Append("\n\n");
+                if (b == 1)
+                {
+                    txt__label.Text += lineCount + "\n\n";
+                }
+                if (b == -1)
+                {
+                    txt__label.Text = txt__label.Text.Remove(txt__label.Text.Length - 3);
+                }
+                //txt__label.Text = sb.ToString();
+
+            }
+
+        }
+
+        private void ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            txt__label.ScrollToVerticalOffset(e.VerticalOffset);
+        }
 
         #region Program wide usefull methods & global variables
 
@@ -68,9 +112,7 @@ namespace CSC_Proj
         //Done || Can still be inproved if anyone wants to give it a shot, work on shortcuts for save, new etc. alos the RTF save file
         #region File Menu Items
 
-        private System.Drawing.Printing.PrintDocument docToPrint = new System.Drawing.Printing.PrintDocument();
-        
-
+        //      PRINT function
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
 
@@ -127,8 +169,6 @@ namespace CSC_Proj
                         Math.Max(ia.MediaSizeHeight - (ia.OriginHeight + ia.ExtentHeight), pagePadding.Bottom));
 
                 flowDocumentCopy.ColumnWidth = double.PositiveInfinity;
-
-
 
                 // Send DocumentPaginator to the printer.
 
@@ -210,7 +250,7 @@ namespace CSC_Proj
                     range = new TextRange(MainTextBox.Document.ContentStart, MainTextBox.Document.ContentEnd);
                     fStream = new System.IO.FileStream(openFileDialog1.FileName, System.IO.FileMode.OpenOrCreate);
                     string format = "";
-                    
+
                     //writes the data in the correct format for txt
                     if (openFileDialog1.FileName.EndsWith(".txt"))
                     {
@@ -230,7 +270,7 @@ namespace CSC_Proj
 
                     fStream.Close();
                 }
-            }        
+            }
         }
 
         #endregion
@@ -295,7 +335,7 @@ namespace CSC_Proj
                 string fontStyle = Convert.ToString(openFontDialog1.Font.Style);
                 bool underline = openFontDialog1.Font.Underline;
                 bool strikeout = openFontDialog1.Font.Strikeout;
-                
+
                 fontName = openFontDialog1.Font.Name;
                 fontSize = openFontDialog1.Font.Size;
 

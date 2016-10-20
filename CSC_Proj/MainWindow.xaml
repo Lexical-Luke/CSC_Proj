@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSC_Proj"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="522">
+        Title="MainWindow" Height="350" Width="522" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -40,13 +40,14 @@
                 <MenuItem Header="Word Count" HorizontalAlignment="Left" Width="150" Click="MenuItem_Click_WordCount"/>
             </MenuItem>
         </Menu>
-        <RichTextBox x:Name="MainTextBox" Margin="2,29,0,1">
+        <RichTextBox x:Name="MainTextBox" PreviewKeyDown="MainTextBox_keyDown" Margin="24,29,10,10" ScrollViewer.ScrollChanged="ScrollChanged" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <FlowDocument>
                 <Paragraph>
                     <Run Text="This text box is a rich text box"/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
+        <TextBox x:Name="txt__label"   HorizontalAlignment="Left" Margin="0,29,0,10" TextWrapping="Wrap" Text="1&#xD;&#xA;&#xD;&#xA;" Width="24" IsEnabled="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
 
     </Grid>
 </Window>
