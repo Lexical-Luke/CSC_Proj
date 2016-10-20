@@ -14,7 +14,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Printing;
 using System.Drawing;
+using System.Windows.Xps;
+using System.Drawing.Printing;
 using DataFormats = System.Windows.DataFormats;
 using MessageBox = System.Windows.MessageBox;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
@@ -28,10 +31,12 @@ namespace CSC_Proj
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
             MainTextBox.SpellCheck.IsEnabled = true;
+
         }
 
         //**Adding menu item functionality**
@@ -158,6 +163,73 @@ namespace CSC_Proj
             }        
         }
 
+
+        private System.Drawing.Printing.PrintDocument docToPrint = new System.Drawing.Printing.PrintDocument();
+
+        private void MenuItem_Click_Print(object sender, RoutedEventArgs e)
+        {
+
+            TextRange sourceDocument = new TextRange(MainTextBox.Document.ContentStart, MainTextBox.Document.ContentEnd);
+
+            MemoryStream stream = new MemoryStream();
+
+            sourceDocument.Save(stream, DataFormats.Xaml);
+
+
+
+            // Clone the source document’s content into a new FlowDocument.
+
+            FlowDocument flowDocumentCopy = new FlowDocument();
+
+            TextRange copyDocumentRange = new TextRange(flowDocumentCopy.ContentStart, flowDocumentCopy.ContentEnd);
+
+            copyDocumentRange.Load(stream, DataFormats.Xaml);
+
+
+
+            // Create a XpsDocumentWriter object, open a Windows common print dialog.
+
+            // This methods returns a ref parameter that represents information about the dimensions of the printer media.
+
+            PrintDocumentImageableArea ia = null;
+
+            XpsDocumentWriter docWriter = PrintQueue.CreateXpsDocumentWriter(ref ia);
+
+
+
+            if (docWriter != null && ia != null)
+            {
+
+                DocumentPaginator paginator = ((IDocumentPaginatorSource)flowDocumentCopy).DocumentPaginator;
+
+
+
+                // Change the PageSize and PagePadding for the document to match the CanvasSize for the printer device.
+
+                paginator.PageSize = new System.Windows.Size(ia.MediaSizeWidth, ia.MediaSizeHeight);
+
+                Thickness pagePadding = flowDocumentCopy.PagePadding;
+
+                flowDocumentCopy.PagePadding = new Thickness(
+
+                        Math.Max(ia.OriginWidth, pagePadding.Left),
+
+                        Math.Max(ia.OriginHeight, pagePadding.Top),
+
+                        Math.Max(ia.MediaSizeWidth - (ia.OriginWidth + ia.ExtentWidth), pagePadding.Right),
+
+                        Math.Max(ia.MediaSizeHeight - (ia.OriginHeight + ia.ExtentHeight), pagePadding.Bottom));
+
+                flowDocumentCopy.ColumnWidth = double.PositiveInfinity;
+
+
+
+                // Send DocumentPaginator to the printer.
+
+                docWriter.Write(paginator);
+            }
+        }
+
         #endregion
         //Only other text editors just cant open the rtf files that get saved
 
@@ -195,16 +267,17 @@ namespace CSC_Proj
         }
         #endregion
 
-        //Todo, well there is nothing to do yet
+        //Todo, insert images etc
         #region Insert Menu Items
 
 
         #endregion
 
-        //Todo all. (Sven working on font)      ---> not finished || Size and font still to be done. Colour bold underline etc work
+        //Done
         #region Format Menu Items
 
         System.Windows.Forms.FontDialog openFontDialog1;
+
 
         private void MenuItem_Click_Font(object sender, RoutedEventArgs e)
         {
@@ -285,11 +358,6 @@ namespace CSC_Proj
             }
         }
 
-        private void MenuItem_Click_Size(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Size");           
-        }
-
         //                           Change Color
 
         private void MenuItem_Click_Colour(object sender, RoutedEventArgs e)
@@ -309,18 +377,6 @@ namespace CSC_Proj
                 text.ApplyPropertyValue(TextElement.ForegroundProperty, brush);
             }
 
-        }
-
-        private void MenuItem_Click_Lower(object sender, RoutedEventArgs e)
-        {
-            var rtfBox = MainTextBox.Selection.Text;
-            MainTextBox.Selection.Text = rtfBox.ToLower();
-        }
-
-        private void MenuItem_Click_Upper(object sender, RoutedEventArgs e)
-        {
-            var rtfBox = MainTextBox.Selection.Text;
-            MainTextBox.Selection.Text = rtfBox.ToUpper(); 
         }
 
         #endregion
@@ -346,6 +402,7 @@ namespace CSC_Proj
         }
 
         #endregion
+
 
     }
 }
