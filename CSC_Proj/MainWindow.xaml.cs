@@ -201,7 +201,7 @@ namespace CSC_Proj
 
         #endregion
 
-        //Todo all. (Sven working on font)      ---> not finished || Size and font still to be done. Colour bold underline etc work
+        //Done
         #region Format Menu Items
 
         System.Windows.Forms.FontDialog openFontDialog1;
@@ -285,10 +285,6 @@ namespace CSC_Proj
             }
         }
 
-        private void MenuItem_Click_Size(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Size");           
-        }
 
         //                           Change Color
 
@@ -309,18 +305,6 @@ namespace CSC_Proj
                 text.ApplyPropertyValue(TextElement.ForegroundProperty, brush);
             }
 
-        }
-
-        private void MenuItem_Click_Lower(object sender, RoutedEventArgs e)
-        {
-            var rtfBox = MainTextBox.Selection.Text;
-            MainTextBox.Selection.Text = rtfBox.ToLower();
-        }
-
-        private void MenuItem_Click_Upper(object sender, RoutedEventArgs e)
-        {
-            var rtfBox = MainTextBox.Selection.Text;
-            MainTextBox.Selection.Text = rtfBox.ToUpper(); 
         }
 
         #endregion
