@@ -31,14 +31,18 @@
                 <MenuItem Header="Select All" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_SelectAll" />
 
             </MenuItem>
-            <MenuItem Header="Insert"/>
+            <MenuItem Header="Insert">
+                <MenuItem Header="Insert Image" HorizontalAlignment="Left" Width="150" Click="MenuItem_Click_InsertImage"/>
+            </MenuItem>
             <MenuItem Header="Format">
                 <MenuItem Header="Font" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Font"/>
                 <MenuItem Header="Colour" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Colour"/>
             </MenuItem>
             <MenuItem Header="Review">
                 <MenuItem Header="Word Count" HorizontalAlignment="Left" Width="150" Click="MenuItem_Click_WordCount"/>
+                <MenuItem Header="Character Count" HorizontalAlignment="Left" Width="180" Click="MenuItem_Click_CharCount"/>
             </MenuItem>
+            <MenuItem Header="Web" Click="OpenWebBrower"/>
         </Menu>
         <RichTextBox x:Name="MainTextBox" PreviewKeyDown="MainTextBox_keyDown" Margin="29,29,10,10" ScrollViewer.ScrollChanged="ScrollChanged" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <FlowDocument>

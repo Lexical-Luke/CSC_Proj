@@ -20,6 +20,7 @@ using System.Printing;
 using System.Drawing;
 using System.Windows.Xps;
 using System.Drawing.Printing;
+using System.Xml;
 using DataFormats = System.Windows.DataFormats;
 using MessageBox = System.Windows.MessageBox;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
@@ -61,6 +62,9 @@ namespace CSC_Proj
             MainTextBox.SelectAll();
 
             MainTextBox.Selection.Text = "";
+
+            lineCount = 1;
+            txt__label.Text = lineCount + "\n\n";
         }
 
         private string filePath = "";
@@ -109,7 +113,7 @@ namespace CSC_Proj
                     if (txt__label.Text == "" || txt__label.Text == "1")
                     {
                         lineCount = 1;
-                        txt__label.Text = lineCount + "\n\n";                      
+                        txt__label.Text = lineCount + "\n\n";
                     }
                     //txt__label.Text = sb.ToString();
                 }
@@ -119,7 +123,7 @@ namespace CSC_Proj
                 lineCount = 1;
                 txt__label.Text = lineCount + "\n\n";
             }
-            
+
         }
 
         private void ScrollChanged(object sender, ScrollChangedEventArgs e)
@@ -133,9 +137,10 @@ namespace CSC_Proj
         #region File Menu Items
         //Luke made all of these except for the print function which Sven did.
 
+        private System.Drawing.Printing.PrintDocument docToPrint = new System.Drawing.Printing.PrintDocument();
+        //for the print function
 
-        //      PRINT function
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_Click_Print(object sender, RoutedEventArgs e)
         {
 
             TextRange sourceDocument = new TextRange(MainTextBox.Document.ContentStart, MainTextBox.Document.ContentEnd);
@@ -167,7 +172,6 @@ namespace CSC_Proj
 
 
             if (docWriter != null && ia != null)
-
             {
 
                 DocumentPaginator paginator = ((IDocumentPaginatorSource)flowDocumentCopy).DocumentPaginator;
@@ -192,12 +196,12 @@ namespace CSC_Proj
 
                 flowDocumentCopy.ColumnWidth = double.PositiveInfinity;
 
+
+
                 // Send DocumentPaginator to the printer.
 
                 docWriter.Write(paginator);
-
             }
-
         }
 
         private void MenuItem_Click_New(object sender, RoutedEventArgs e)
@@ -295,73 +299,6 @@ namespace CSC_Proj
             }
         }
 
-
-        private System.Drawing.Printing.PrintDocument docToPrint = new System.Drawing.Printing.PrintDocument();
-
-        private void MenuItem_Click_Print(object sender, RoutedEventArgs e)
-        {
-
-            TextRange sourceDocument = new TextRange(MainTextBox.Document.ContentStart, MainTextBox.Document.ContentEnd);
-
-            MemoryStream stream = new MemoryStream();
-
-            sourceDocument.Save(stream, DataFormats.Xaml);
-
-
-
-            // Clone the source document’s content into a new FlowDocument.
-
-            FlowDocument flowDocumentCopy = new FlowDocument();
-
-            TextRange copyDocumentRange = new TextRange(flowDocumentCopy.ContentStart, flowDocumentCopy.ContentEnd);
-
-            copyDocumentRange.Load(stream, DataFormats.Xaml);
-
-
-
-            // Create a XpsDocumentWriter object, open a Windows common print dialog.
-
-            // This methods returns a ref parameter that represents information about the dimensions of the printer media.
-
-            PrintDocumentImageableArea ia = null;
-
-            XpsDocumentWriter docWriter = PrintQueue.CreateXpsDocumentWriter(ref ia);
-
-
-
-            if (docWriter != null && ia != null)
-            {
-
-                DocumentPaginator paginator = ((IDocumentPaginatorSource)flowDocumentCopy).DocumentPaginator;
-
-
-
-                // Change the PageSize and PagePadding for the document to match the CanvasSize for the printer device.
-
-                paginator.PageSize = new System.Windows.Size(ia.MediaSizeWidth, ia.MediaSizeHeight);
-
-                Thickness pagePadding = flowDocumentCopy.PagePadding;
-
-                flowDocumentCopy.PagePadding = new Thickness(
-
-                        Math.Max(ia.OriginWidth, pagePadding.Left),
-
-                        Math.Max(ia.OriginHeight, pagePadding.Top),
-
-                        Math.Max(ia.MediaSizeWidth - (ia.OriginWidth + ia.ExtentWidth), pagePadding.Right),
-
-                        Math.Max(ia.MediaSizeHeight - (ia.OriginHeight + ia.ExtentHeight), pagePadding.Bottom));
-
-                flowDocumentCopy.ColumnWidth = double.PositiveInfinity;
-
-
-
-                // Send DocumentPaginator to the printer.
-
-                docWriter.Write(paginator);
-            }
-        }
-
         #endregion
         //Only other text editors just cant open the rtf files that get saved
 
@@ -403,6 +340,10 @@ namespace CSC_Proj
         //Todo, insert images etc
         #region Insert Menu Items
 
+        private void MenuItem_Click_InsertImage(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         #endregion
 
@@ -518,25 +459,78 @@ namespace CSC_Proj
         //Todo, character/word count
         #region Review Menu Items
 
-        //Kati made this
+        // Kati did this 
         private void MenuItem_Click_WordCount(object sender, RoutedEventArgs e)
         {
             MainTextBox.SelectAll();
             string rtfBox = MainTextBox.Selection.Text;
 
+
+
             //unhighlights all the text
             MainTextBox.Copy();
             MainTextBox.Paste();
 
-            string[] eh = null;
+            string result = "";
 
-            string[] words = rtfBox.Split(eh, StringSplitOptions.RemoveEmptyEntries);
+            foreach (char c in rtfBox)
+            {
+                if (!char.IsPunctuation(c))
+                {
+                    result += c;
+                }
+            }
 
-            MessageBox.Show(string.Format("There are {0} words in the file.", words.Length));
+            string unwanted = " 0123456789!\"#$%&()*+,-./:;<=>?@[]^_`{|}~'\\;\r\n"; // removes unwanted chars that would be counted as words. 
+            char[] delims = unwanted.ToCharArray();
+            string[] results = rtfBox.Split(delims, StringSplitOptions.RemoveEmptyEntries); 
+           
+            
+
+            MessageBox.Show(string.Format("There are {0} words in the file.", results.Length));
+
+        }
+
+        // Kati did this
+        private void MenuItem_Click_CharCount(object sender, RoutedEventArgs e)
+        {
+            MainTextBox.SelectAll();
+            string rtfBox = MainTextBox.Selection.Text;
+            //unhighlights all the text
+            MainTextBox.Copy();
+            MainTextBox.Paste();
+            letterFreqs(rtfBox);
+        }
+
+        // Kati did this
+        private void letterFreqs(string theText)
+        {
+
+            var dic = theText.Aggregate(new Dictionary<char, int>(), (prev, next) =>
+            {
+                if (!prev.ContainsKey(next) && !char.IsWhiteSpace(next))
+                {
+                    prev.Add(next, theText.Count(x => x == next));
+                    return prev;
+                }
+                return prev;
+            });
+
+            var str = dic.Aggregate(new StringBuilder(),
+                (prev, next) =>
+                    prev.Append("Char ").Append(next.Key).Append(" appears ").Append(next.Value).Append(" times\n")).ToString();
+            MessageBox.Show(str);
+
         }
 
         #endregion
 
 
+        private Browser benTheBrowser;
+        public void OpenWebBrower(object sender, RoutedEventArgs e)
+        {
+            benTheBrowser = new Browser();
+            benTheBrowser.Visibility = Visibility.Visible;
+        }
     }
 }
