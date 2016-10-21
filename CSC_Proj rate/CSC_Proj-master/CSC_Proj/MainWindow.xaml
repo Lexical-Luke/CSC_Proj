@@ -1,0 +1,60 @@
+﻿<Window x:Class="CSC_Proj.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CSC_Proj"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="522" >
+    <ScrollViewer>
+        <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <Menu x:Name="menu" Height="29" VerticalAlignment="Top">
+            <MenuItem Header="File" Height="29" Width="36">
+                <MenuItem Header="New" HorizontalAlignment="Left" Width="142" Margin="0,0,-2,0" Click="MenuItem_Click_New"/>
+                <MenuItem Header="Open " HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Open"/>
+                <MenuItem Header="Save" Margin="0,0,-1,0" >
+                    <MenuItem Header="Save" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Save"/>
+                    <MenuItem Header="Save As" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_SaveAs"/>
+                </MenuItem>
+                <MenuItem Header="Print" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click"/>
+
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Undo" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Undo"/>
+                <MenuItem Header="Redo" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Redo"/>
+                <MenuItem Header="Cut" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Cut" />
+                <MenuItem Header="Copy" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Copy" />
+                <MenuItem Header="Paste" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Paste" />
+                <MenuItem Header="Select All" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_SelectAll" />
+
+            </MenuItem>
+            <MenuItem Header="Insert">
+                <MenuItem Header="Time" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Time"/>
+            </MenuItem>
+            <MenuItem Header="Format">
+                <MenuItem Header="Font" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Font"/>
+                <MenuItem Header="Colour" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Colour"/>
+            </MenuItem>
+            <MenuItem Header="Review">
+                <MenuItem Header="Word Count" HorizontalAlignment="Left" Width="150" Click="MenuItem_Click_WordCount"/>
+                    <MenuItem Header="Rate" HorizontalAlignment="Left" Width="150" Click="MenuItem_Click_Rate"/>
+                </MenuItem>
+        </Menu>
+   
+            <RichTextBox x:Name="MainTextBox" PreviewKeyDown="MainTextBox_keyDown" Margin="24,29,10,10" ScrollViewer.ScrollChanged="ScrollChanged" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="This text box is a rich text box"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        
+        <TextBox x:Name="txt__label"   HorizontalAlignment="Left" Margin="0,29,0,10" TextWrapping="Wrap" Text="1&#xD;&#xA;&#xD;&#xA;" Width="24" IsEnabled="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+            
+    </Grid>
+    </ScrollViewer>
+</Window>
