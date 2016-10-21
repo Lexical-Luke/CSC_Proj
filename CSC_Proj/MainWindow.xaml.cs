@@ -65,18 +65,22 @@ namespace CSC_Proj
 
         private string filePath = "";
 
-        //line counter made by Sven
+        //line counter made by Sven, fixed by Luke 
+        //error: Counter & program would break if it went past 1 eg. spam backspace.
         int lineCount = 1;
+
         private void MainTextBox_keyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             var textRange = new TextRange(MainTextBox.Document.ContentStart, MainTextBox.Document.ContentEnd);
             var b = 0;
             TextPointer textPointer = MainTextBox.Selection.Start;
+
             if (e.Key == Key.Return)
             {
                 lineCount++;
                 b = 1;
             }
+
             if (e.Key == Key.Back && textPointer.GetTextInRun(LogicalDirection.Backward).LastOrDefault().GetHashCode() == 0)
             {
                 lineCount--;
@@ -85,23 +89,37 @@ namespace CSC_Proj
 
             // back up code: 
             //var t = textRange.Text.Where(x => x == '\n').Count();
-            if (b != 0)
+            try
             {
-                //lineCount = t;
-                var sb = new StringBuilder();
-                //for (int i = 1; i <= lineCount; i++) sb.Append(i).Append("\n\n");
-                if (b == 1)
+                if (b != 0)
                 {
-                    txt__label.Text += lineCount + "\n\n";
-                }
-                if (b == -1)
-                {
-                    txt__label.Text = txt__label.Text.Remove(txt__label.Text.Length - 3);
-                }
-                //txt__label.Text = sb.ToString();
+                    //lineCount = t;
+                    var sb = new StringBuilder();
+                    //for (int i = 1; i <= lineCount; i++) sb.Append(i).Append("\n\n");
+                    if (b == 1)
+                    {
+                        txt__label.Text += lineCount + "\n\n";
+                    }
 
+                    if (b == -1)
+                    {
+                        txt__label.Text = txt__label.Text.Remove(txt__label.Text.Length - 3);
+                    }
+
+                    if (txt__label.Text == "" || txt__label.Text == "1")
+                    {
+                        lineCount = 1;
+                        txt__label.Text = lineCount + "\n\n";                      
+                    }
+                    //txt__label.Text = sb.ToString();
+                }
             }
-
+            catch (ArgumentOutOfRangeException)
+            {
+                lineCount = 1;
+                txt__label.Text = lineCount + "\n\n";
+            }
+            
         }
 
         private void ScrollChanged(object sender, ScrollChangedEventArgs e)
