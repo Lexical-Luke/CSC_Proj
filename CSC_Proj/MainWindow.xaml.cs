@@ -459,7 +459,7 @@ namespace CSC_Proj
         //Todo, character/word count
         #region Review Menu Items
 
-        // Kati did this 
+        //Kati did this 
         private void MenuItem_Click_WordCount(object sender, RoutedEventArgs e)
         {
             MainTextBox.SelectAll();
@@ -491,7 +491,7 @@ namespace CSC_Proj
 
         }
 
-        // Kati did this
+        //Kati did this
         private void MenuItem_Click_CharCount(object sender, RoutedEventArgs e)
         {
             MainTextBox.SelectAll();
@@ -502,7 +502,7 @@ namespace CSC_Proj
             letterFreqs(rtfBox);
         }
 
-        // Kati did this
+        //Kati did this, and luke helped a little
         private void letterFreqs(string theText)
         {
 
@@ -525,7 +525,7 @@ namespace CSC_Proj
 
         #endregion
 
-
+        //Ben did this
         private Browser benTheBrowser;
         public void OpenWebBrower(object sender, RoutedEventArgs e)
         {
