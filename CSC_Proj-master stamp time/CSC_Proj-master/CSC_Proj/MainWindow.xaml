@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:CSC_Proj"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="522" >
-    <Grid>
+    <ScrollViewer>
+        <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="0*"/>
@@ -19,7 +20,7 @@
                     <MenuItem Header="Save" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Save"/>
                     <MenuItem Header="Save As" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_SaveAs"/>
                 </MenuItem>
-                <MenuItem Header="Print" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Print"/>
+                <MenuItem Header="Print" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click"/>
 
             </MenuItem>
             <MenuItem Header="Edit">
@@ -31,7 +32,9 @@
                 <MenuItem Header="Select All" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_SelectAll" />
 
             </MenuItem>
-            <MenuItem Header="Insert"/>
+            <MenuItem Header="Insert">
+                <MenuItem Header="Time" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Time"/>
+            </MenuItem>
             <MenuItem Header="Format">
                 <MenuItem Header="Font" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Font"/>
                 <MenuItem Header="Colour" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Colour"/>
@@ -40,14 +43,17 @@
                 <MenuItem Header="Word Count" HorizontalAlignment="Left" Width="150" Click="MenuItem_Click_WordCount"/>
             </MenuItem>
         </Menu>
-        <RichTextBox x:Name="MainTextBox" PreviewKeyDown="MainTextBox_keyDown" Margin="29,29,10,10" ScrollViewer.ScrollChanged="ScrollChanged" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+   
+            <RichTextBox x:Name="MainTextBox" PreviewKeyDown="MainTextBox_keyDown" Margin="24,29,10,10" ScrollViewer.ScrollChanged="ScrollChanged" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <FlowDocument>
                 <Paragraph>
                     <Run Text="This text box is a rich text box"/>
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-        <TextBox x:Name="txt__label"   HorizontalAlignment="Left" Margin="0,29,0,10" TextWrapping="Wrap" Text="1&#xD;&#xA;&#xD;&#xA;" Width="30" IsEnabled="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
-
+        
+        <TextBox x:Name="txt__label"   HorizontalAlignment="Left" Margin="0,29,0,10" TextWrapping="Wrap" Text="1&#xD;&#xA;&#xD;&#xA;" Width="24" IsEnabled="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+            
     </Grid>
+    </ScrollViewer>
 </Window>

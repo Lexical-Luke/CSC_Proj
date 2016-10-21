@@ -26,6 +26,7 @@ using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 using RichTextBox = System.Windows.Forms.RichTextBox;
 using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
 
+
 namespace CSC_Proj
 {
     /// <summary>
@@ -52,21 +53,17 @@ namespace CSC_Proj
         //plz always stick to the same naming conventions, 
         //this is a big project.
 
-
-        #region Program wide usefull methods & global variables
-
-        //duh it clears the text box
-        private void clear()
-        {
-            MainTextBox.SelectAll();
-
-            MainTextBox.Selection.Text = "";
-        }
-
-        private string filePath = "";
-
-        //line counter made by Sven
         int lineCount = 1;
+
+
+
+
+
+
+
+
+
+
         private void MainTextBox_keyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             var textRange = new TextRange(MainTextBox.Document.ContentStart, MainTextBox.Document.ContentEnd);
@@ -109,12 +106,22 @@ namespace CSC_Proj
             txt__label.ScrollToVerticalOffset(e.VerticalOffset);
         }
 
+        #region Program wide usefull methods & global variables
+
+        //duh it clears the text box
+        private void clear()
+        {
+            MainTextBox.SelectAll();
+
+            MainTextBox.Selection.Text = "";
+        }
+
+        private string filePath = "";
+
         #endregion
 
         //Done || Can still be inproved if anyone wants to give it a shot, work on shortcuts for save, new etc. alos the RTF save file
         #region File Menu Items
-        //Luke made all of these except for the print function which Sven did.
-
 
         //      PRINT function
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -277,79 +284,11 @@ namespace CSC_Proj
             }
         }
 
-
-        private System.Drawing.Printing.PrintDocument docToPrint = new System.Drawing.Printing.PrintDocument();
-
-        private void MenuItem_Click_Print(object sender, RoutedEventArgs e)
-        {
-
-            TextRange sourceDocument = new TextRange(MainTextBox.Document.ContentStart, MainTextBox.Document.ContentEnd);
-
-            MemoryStream stream = new MemoryStream();
-
-            sourceDocument.Save(stream, DataFormats.Xaml);
-
-
-
-            // Clone the source document’s content into a new FlowDocument.
-
-            FlowDocument flowDocumentCopy = new FlowDocument();
-
-            TextRange copyDocumentRange = new TextRange(flowDocumentCopy.ContentStart, flowDocumentCopy.ContentEnd);
-
-            copyDocumentRange.Load(stream, DataFormats.Xaml);
-
-
-
-            // Create a XpsDocumentWriter object, open a Windows common print dialog.
-
-            // This methods returns a ref parameter that represents information about the dimensions of the printer media.
-
-            PrintDocumentImageableArea ia = null;
-
-            XpsDocumentWriter docWriter = PrintQueue.CreateXpsDocumentWriter(ref ia);
-
-
-
-            if (docWriter != null && ia != null)
-            {
-
-                DocumentPaginator paginator = ((IDocumentPaginatorSource)flowDocumentCopy).DocumentPaginator;
-
-
-
-                // Change the PageSize and PagePadding for the document to match the CanvasSize for the printer device.
-
-                paginator.PageSize = new System.Windows.Size(ia.MediaSizeWidth, ia.MediaSizeHeight);
-
-                Thickness pagePadding = flowDocumentCopy.PagePadding;
-
-                flowDocumentCopy.PagePadding = new Thickness(
-
-                        Math.Max(ia.OriginWidth, pagePadding.Left),
-
-                        Math.Max(ia.OriginHeight, pagePadding.Top),
-
-                        Math.Max(ia.MediaSizeWidth - (ia.OriginWidth + ia.ExtentWidth), pagePadding.Right),
-
-                        Math.Max(ia.MediaSizeHeight - (ia.OriginHeight + ia.ExtentHeight), pagePadding.Bottom));
-
-                flowDocumentCopy.ColumnWidth = double.PositiveInfinity;
-
-
-
-                // Send DocumentPaginator to the printer.
-
-                docWriter.Write(paginator);
-            }
-        }
-
         #endregion
         //Only other text editors just cant open the rtf files that get saved
 
         //Done
         #region Edit Menu Items
-        //Luke Made all of these
 
         private void MenuItem_Click_Undo(object sender, RoutedEventArgs e)
         {
@@ -382,7 +321,7 @@ namespace CSC_Proj
         }
         #endregion
 
-        //Todo, insert images etc
+        //Todo, well there is nothing to do yet
         #region Insert Menu Items
 
 
@@ -390,7 +329,6 @@ namespace CSC_Proj
 
         //Done
         #region Format Menu Items
-        //Sven made all of these
 
         System.Windows.Forms.FontDialog openFontDialog1;
 
@@ -474,6 +412,7 @@ namespace CSC_Proj
             }
         }
 
+
         //                           Change Color
 
         private void MenuItem_Click_Colour(object sender, RoutedEventArgs e)
@@ -497,10 +436,9 @@ namespace CSC_Proj
 
         #endregion
 
-        //Todo, character/word count
+        //Todo, well there is nothing to do yet
         #region Review Menu Items
 
-        //Kati made this
         private void MenuItem_Click_WordCount(object sender, RoutedEventArgs e)
         {
             MainTextBox.SelectAll();
@@ -517,8 +455,16 @@ namespace CSC_Proj
             MessageBox.Show(string.Format("There are {0} words in the file.", words.Length));
         }
 
+
         #endregion
 
+        private void MenuItem_Click_Time(object sender, RoutedEventArgs e)
+        {
+            string t = DateTime.Now.ToLongDateString() + "\n" +  DateTime.Now.ToLongTimeString();
 
+            MainTextBox.CaretPosition.InsertTextInRun( t);
+
+            //MessageBox.Show(t);
+        }
     }
 }
