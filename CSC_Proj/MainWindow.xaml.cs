@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -35,11 +36,16 @@ namespace CSC_Proj
     public partial class MainWindow : Window
     {
 
+        Stopwatch watch = new Stopwatch();
+        bool firstTime;
+
         public MainWindow()
         {
             InitializeComponent();
+            InitializeComponent();
+            watch = System.Diagnostics.Stopwatch.StartNew();
             MainTextBox.SpellCheck.IsEnabled = true;
-
+            firstTime = true;
         }
 
         //**Adding menu item functionality**
@@ -52,8 +58,7 @@ namespace CSC_Proj
         //With a descriptive name of what it is like 'Font'
         //plz always stick to the same naming conventions, 
         //this is a big project.
-
-
+        
         #region Program wide usefull methods & global variables
 
         //duh it clears the text box
@@ -65,6 +70,9 @@ namespace CSC_Proj
 
             lineCount = 1;
             txt__label.Text = lineCount + "\n\n";
+
+            string timeAtOpen = DateTime.Now.ToLongDateString() + "\n" + DateTime.Now.ToLongTimeString();
+            string past = DateTime.Now.ToLongTimeString();
         }
 
         private string filePath = "";
@@ -133,76 +141,8 @@ namespace CSC_Proj
 
         #endregion
 
-        //Done || Can still be inproved if anyone wants to give it a shot, work on shortcuts for save, new etc. alos the RTF save file
         #region File Menu Items
         //Luke made all of these except for the print function which Sven did.
-
-        private System.Drawing.Printing.PrintDocument docToPrint = new System.Drawing.Printing.PrintDocument();
-        //for the print function
-
-        private void MenuItem_Click_Print(object sender, RoutedEventArgs e)
-        {
-
-            TextRange sourceDocument = new TextRange(MainTextBox.Document.ContentStart, MainTextBox.Document.ContentEnd);
-
-            MemoryStream stream = new MemoryStream();
-
-            sourceDocument.Save(stream, DataFormats.Xaml);
-
-
-
-            // Clone the source document’s content into a new FlowDocument.
-
-            FlowDocument flowDocumentCopy = new FlowDocument();
-
-            TextRange copyDocumentRange = new TextRange(flowDocumentCopy.ContentStart, flowDocumentCopy.ContentEnd);
-
-            copyDocumentRange.Load(stream, DataFormats.Xaml);
-
-
-
-            // Create a XpsDocumentWriter object, open a Windows common print dialog.
-
-            // This methods returns a ref parameter that represents information about the dimensions of the printer media.
-
-            PrintDocumentImageableArea ia = null;
-
-            XpsDocumentWriter docWriter = PrintQueue.CreateXpsDocumentWriter(ref ia);
-
-
-
-            if (docWriter != null && ia != null)
-            {
-
-                DocumentPaginator paginator = ((IDocumentPaginatorSource)flowDocumentCopy).DocumentPaginator;
-
-
-
-                // Change the PageSize and PagePadding for the document to match the CanvasSize for the printer device.
-
-                paginator.PageSize = new System.Windows.Size(ia.MediaSizeWidth, ia.MediaSizeHeight);
-
-                Thickness pagePadding = flowDocumentCopy.PagePadding;
-
-                flowDocumentCopy.PagePadding = new Thickness(
-
-                        Math.Max(ia.OriginWidth, pagePadding.Left),
-
-                        Math.Max(ia.OriginHeight, pagePadding.Top),
-
-                        Math.Max(ia.MediaSizeWidth - (ia.OriginWidth + ia.ExtentWidth), pagePadding.Right),
-
-                        Math.Max(ia.MediaSizeHeight - (ia.OriginHeight + ia.ExtentHeight), pagePadding.Bottom));
-
-                flowDocumentCopy.ColumnWidth = double.PositiveInfinity;
-
-
-
-                // Send DocumentPaginator to the printer.
-
-                docWriter.Write(paginator);
-            }
-        }
 
         private void MenuItem_Click_New(object sender, RoutedEventArgs e)
         {
@@ -299,10 +239,73 @@ namespace CSC_Proj
             }
         }
 
-        #endregion
-        //Only other text editors just cant open the rtf files that get saved
+        private System.Drawing.Printing.PrintDocument docToPrint = new System.Drawing.Printing.PrintDocument();
+        private void MenuItem_Click_Print(object sender, RoutedEventArgs e)
+        {
 
-        //Done
+            TextRange sourceDocument = new TextRange(MainTextBox.Document.ContentStart, MainTextBox.Document.ContentEnd);
+
+            MemoryStream stream = new MemoryStream();
+
+            sourceDocument.Save(stream, DataFormats.Xaml);
+
+
+
+            // Clone the source document’s content into a new FlowDocument.
+
+            FlowDocument flowDocumentCopy = new FlowDocument();
+
+            TextRange copyDocumentRange = new TextRange(flowDocumentCopy.ContentStart, flowDocumentCopy.ContentEnd);
+
+            copyDocumentRange.Load(stream, DataFormats.Xaml);
+
+
+
+            // Create a XpsDocumentWriter object, open a Windows common print dialog.
+
+            // This methods returns a ref parameter that represents information about the dimensions of the printer media.
+
+            PrintDocumentImageableArea ia = null;
+
+            XpsDocumentWriter docWriter = PrintQueue.CreateXpsDocumentWriter(ref ia);
+
+
+
+            if (docWriter != null && ia != null)
+            {
+
+                DocumentPaginator paginator = ((IDocumentPaginatorSource)flowDocumentCopy).DocumentPaginator;
+
+
+
+                // Change the PageSize and PagePadding for the document to match the CanvasSize for the printer device.
+
+                paginator.PageSize = new System.Windows.Size(ia.MediaSizeWidth, ia.MediaSizeHeight);
+
+                Thickness pagePadding = flowDocumentCopy.PagePadding;
+
+                flowDocumentCopy.PagePadding = new Thickness(
+
+                        Math.Max(ia.OriginWidth, pagePadding.Left),
+
+                        Math.Max(ia.OriginHeight, pagePadding.Top),
+
+                        Math.Max(ia.MediaSizeWidth - (ia.OriginWidth + ia.ExtentWidth), pagePadding.Right),
+
+                        Math.Max(ia.MediaSizeHeight - (ia.OriginHeight + ia.ExtentHeight), pagePadding.Bottom));
+
+                flowDocumentCopy.ColumnWidth = double.PositiveInfinity;
+
+
+
+                // Send DocumentPaginator to the printer.
+
+                docWriter.Write(paginator);
+            }
+        }
+
+        #endregion
+
         #region Edit Menu Items
         //Luke Made all of these
 
@@ -337,22 +340,10 @@ namespace CSC_Proj
         }
         #endregion
 
-        //Todo, insert images etc
-        #region Insert Menu Items
-
-        private void MenuItem_Click_InsertImage(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        #endregion
-
-        //Done
         #region Format Menu Items
         //Sven made all of these
 
         System.Windows.Forms.FontDialog openFontDialog1;
-
 
         private void MenuItem_Click_Font(object sender, RoutedEventArgs e)
         {
@@ -433,8 +424,6 @@ namespace CSC_Proj
             }
         }
 
-        //                           Change Color
-
         private void MenuItem_Click_Colour(object sender, RoutedEventArgs e)
         {
             TextRange text = new TextRange(MainTextBox.Selection.Start, MainTextBox.Selection.End);     // selected text
@@ -456,7 +445,6 @@ namespace CSC_Proj
 
         #endregion
 
-        //Todo, character/word count
         #region Review Menu Items
 
         //Kati did this 
@@ -518,13 +506,91 @@ namespace CSC_Proj
 
             var str = dic.Aggregate(new StringBuilder(),
                 (prev, next) =>
-                    prev.Append("Char ").Append(next.Key).Append(" appears ").Append(next.Value).Append(" times\n")).ToString();
+                    prev.Append("The character ").Append(next.Key).Append(" appears ").Append(next.Value).Append(" time(s).\n")).ToString();
             MessageBox.Show(str);
 
         }
 
+        //ben did this
+        string timeAtOpen = DateTime.Now.ToLongDateString() + "\n" + DateTime.Now.ToLongTimeString();
+        private void MenuItem_Click_Time(object sender, RoutedEventArgs e)
+        {
+            string timeAtClick = DateTime.Now.ToLongDateString() + "\n" + DateTime.Now.ToLongTimeString();
+
+            //MainTextBox.CaretPosition.InsertTextInRun(t);
+
+            MessageBox.Show("You started working on this document at:\n" + timeAtOpen + "\n\nIt is now:\n" + timeAtClick);
+        }
+
+        //ben did this
+        private void MenuItem_Click_Rate(object sender, RoutedEventArgs e)
+        {
+
+            //populate string [] with no spaces of text
+            string[] start = null;
+            MainTextBox.SelectAll();
+            string p = MainTextBox.Selection.Text;
+
+            string[] temp = p.Split(start, StringSplitOptions.RemoveEmptyEntries);
+            List<string> words = new List<string>(temp);
+
+
+            string plural = "";
+
+            string output = "";
+
+            var watchCopy = watch;
+
+
+            watchCopy = watch;
+            watchCopy.Stop();
+            double elpsdSeconds = watch.Elapsed.TotalSeconds;
+            int minutes = watch.Elapsed.Minutes;
+            int seconds = Convert.ToInt32(elpsdSeconds);
+
+
+            //deals with wether one word was typed
+            if (plural.Length == 1) plural = "word";
+            else plural = "words";
+
+
+            Double time = 0;
+            string repeat = "";
+            //deals with syntax of first check vs revisit
+            if (firstTime == true) repeat = "start";
+            if (firstTime == false) repeat = "lastchecked";
+
+
+
+            if (minutes == 0)
+            {
+                time = (seconds);
+                output = string.Format("You have typed {0} {1} in {2} seconds \n since your {3}.", (words.Count), plural, seconds, repeat);
+
+            }
+
+            if (minutes == 1)
+            {
+                time = (minutes);
+                output = string.Format("You have typed {0} {1} per minute {2} \n since your {3}.", (words.Count), plural, time, repeat);
+            }
+
+            else if (minutes > 1)
+            {
+
+                time = (minutes);
+                output = string.Format("You have typed {0} {1} per {2} minutes  \n since your {3}.", (words.Count), plural, time, repeat);
+            }
+
+
+            watchCopy.Restart();
+            firstTime = false;
+            MessageBox.Show(output);
+        }
+
         #endregion
 
+        #region Web Menu Item
         //Ben did this
         private Browser benTheBrowser;
         public void OpenWebBrower(object sender, RoutedEventArgs e)
@@ -532,5 +598,6 @@ namespace CSC_Proj
             benTheBrowser = new Browser();
             benTheBrowser.Visibility = Visibility.Visible;
         }
+        #endregion
     }
 }

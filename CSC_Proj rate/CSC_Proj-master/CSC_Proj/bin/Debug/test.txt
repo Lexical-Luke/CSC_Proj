@@ -1,8 +1,0 @@
-
-System.Windows.Documents.TextPointer
-
-
-System.Windows.Documents.TextPointer
-
-System.Windows.Documents.TextPointer
-System.Windows.Documents.TextPointer

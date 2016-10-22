@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSC_Proj"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="522" >
+        Title="Pyramid" Height="350" Width="522" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -13,7 +13,7 @@
         </Grid.ColumnDefinitions>
         <Menu x:Name="menu" Height="29" VerticalAlignment="Top">
             <MenuItem Header="File" Height="29" Width="36">
-                <MenuItem Header="New" HorizontalAlignment="Left" Width="142" Margin="0,0,-2,0" Click="MenuItem_Click_New"/>
+                <MenuItem Header="New" HorizontalAlignment="Left" Width="140" Margin="0,0,-2,0" Click="MenuItem_Click_New"/>
                 <MenuItem Header="Open " HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Open"/>
                 <MenuItem Header="Save" Margin="0,0,-1,0" >
                     <MenuItem Header="Save" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Save"/>
@@ -29,18 +29,17 @@
                 <MenuItem Header="Copy" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Copy" />
                 <MenuItem Header="Paste" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Paste" />
                 <MenuItem Header="Select All" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_SelectAll" />
-
             </MenuItem>
-            <MenuItem Header="Insert">
-                <MenuItem Header="Insert Image" HorizontalAlignment="Left" Width="150" Click="MenuItem_Click_InsertImage"/>
-            </MenuItem>
+            
             <MenuItem Header="Format">
                 <MenuItem Header="Font" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Font"/>
                 <MenuItem Header="Colour" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Colour"/>
             </MenuItem>
             <MenuItem Header="Review">
-                <MenuItem Header="Word Count" HorizontalAlignment="Left" Width="150" Click="MenuItem_Click_WordCount"/>
+                <MenuItem Header="Word Count" HorizontalAlignment="Left" Width="180" Click="MenuItem_Click_WordCount"/>
                 <MenuItem Header="Character Count" HorizontalAlignment="Left" Width="180" Click="MenuItem_Click_CharCount"/>
+                <MenuItem Header="Timer" HorizontalAlignment="Left" Width="180" Click="MenuItem_Click_Time"/>
+                <MenuItem Header="Typing Rate" HorizontalAlignment="Left" Width="180" Click="MenuItem_Click_Rate"/>
             </MenuItem>
             <MenuItem Header="Web" Click="OpenWebBrower"/>
         </Menu>
