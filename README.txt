@@ -1,4 +1,5 @@
 Welcome to Pyramid text editor, the text editor created by Luke Wilkinson, Sven-Erik Weiss, Benjamin Trollope and Kathryn Reeve.
+
   This is a txt and rtf text editor that incorporates a number of useful features. It is designed to be easy to use and simplistic, so that anyone can use it with ease and without many instructions, if any are at all needed.  
 
  A quick overview:
