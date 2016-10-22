@@ -44,11 +44,7 @@
             <MenuItem Header="Web" Click="OpenWebBrower"/>
         </Menu>
         <RichTextBox x:Name="MainTextBox" PreviewKeyDown="MainTextBox_keyDown" Margin="29,29,10,10" ScrollViewer.ScrollChanged="ScrollChanged" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text="This text box is a rich text box"/>
-                </Paragraph>
-            </FlowDocument>
+            <FlowDocument/>
         </RichTextBox>
         <TextBox x:Name="txt__label"   HorizontalAlignment="Left" Margin="0,29,0,10" TextWrapping="Wrap" Text="1&#xD;&#xA;&#xD;&#xA;" Width="30" IsEnabled="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
 
