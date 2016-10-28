@@ -57,7 +57,7 @@
             Background="White" 
             BorderBrush="Black" 
             BorderThickness="1" 
-            CornerRadius="0,55,0,55" 
+            CornerRadius="10,10,10,10" 
             HorizontalAlignment="Center" 
             VerticalAlignment="Center">
                 <StackPanel>
