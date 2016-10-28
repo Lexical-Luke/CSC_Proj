@@ -484,10 +484,9 @@ namespace CSC_Proj
         private string strToReplace;
         private void YesButton_Click1(object sender, RoutedEventArgs e)
         {
-            // YesButton Clicked! Let's hide our InputBox and handle the input text.
             InputBox1.Visibility = System.Windows.Visibility.Collapsed;
 
-            // Do something with the Input
+            //Get the 1st input
             try
             {
                 strToReplace = InputTextBox1.Text;         
@@ -500,18 +499,15 @@ namespace CSC_Proj
 
             InputBox2.Visibility = System.Windows.Visibility.Visible;
             
-
-            // Clear InputBox.
             InputTextBox1.Text = String.Empty;
         }
 
         private void YesButton_Click2(object sender, RoutedEventArgs e)
-        {
-            // YesButton Clicked! Let's hide our InputBox and handle the input text.          
+        {          
             InputBox2.Visibility = System.Windows.Visibility.Collapsed;
 
 
-            // Do something with the Input
+            //Use the both the inputs
             try
             {
                 string replacementStr = InputTextBox2.Text;
@@ -528,17 +524,13 @@ namespace CSC_Proj
                 MessageBox.Show("Invalid Input");
             }
             
-
-            // Clear InputBox.
             InputTextBox2.Text = String.Empty;
         }
 
         private void NoButton_Click(object sender, RoutedEventArgs e)
         {
-            // NoButton Clicked! Let's hide our InputBox.
             InputBox1.Visibility = System.Windows.Visibility.Collapsed;
 
-            // Clear InputBox.
             InputTextBox1.Text = String.Empty;
         }
         #endregion
