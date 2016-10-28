@@ -31,7 +31,6 @@ D:\Users\Desktop\UNI\Com sci Prac\CSC\Semester 2\CSC_Proj\CSC_Proj\obj\Debug\CSC
 \\Mac\Home\Documents\University\Comp Sci\Group Project\CSC_Proj\CSC_Proj\bin\Debug\inspector.pak
 \\Mac\Home\Documents\University\Comp Sci\Group Project\CSC_Proj\CSC_Proj\bin\Debug\xinput9_1_0.dll
 \\Mac\Home\Documents\University\Comp Sci\Group Project\CSC_Proj\CSC_Proj\bin\Debug\pdf_js.pak
-\\Mac\Home\Documents\University\Comp Sci\Group Project\CSC_Proj\CSC_Proj\obj\Debug\CSC_Proj.csprojResolveAssemblyReference.cache
 \\Mac\Home\Documents\University\Comp Sci\Group Project\CSC_Proj\CSC_Proj\obj\Debug\Browser.g.cs
 \\Mac\Home\Documents\University\Comp Sci\Group Project\CSC_Proj\CSC_Proj\obj\Debug\MainWindow.g.cs
 \\Mac\Home\Documents\University\Comp Sci\Group Project\CSC_Proj\CSC_Proj\obj\Debug\App.g.cs

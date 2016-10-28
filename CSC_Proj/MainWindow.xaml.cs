@@ -473,13 +473,15 @@ namespace CSC_Proj
             MainTextBox.Selection.Text = rtfStr;
         }
 
+
+        //Luke did this
+        #region Replace All
         private void MenuItem_Click_ReplaceAll(object sender, RoutedEventArgs e)
         {
             InputBox1.Visibility = System.Windows.Visibility.Visible;
         }
-
+        
         private string strToReplace;
-
         private void YesButton_Click1(object sender, RoutedEventArgs e)
         {
             // YesButton Clicked! Let's hide our InputBox and handle the input text.
@@ -488,7 +490,7 @@ namespace CSC_Proj
             // Do something with the Input
             try
             {
-                string strToReplace = InputTextBox1.Text;         
+                strToReplace = InputTextBox1.Text;         
             }
 
             catch (Exception)
@@ -516,7 +518,7 @@ namespace CSC_Proj
 
                 MainTextBox.SelectAll();
                 string rtfBox = MainTextBox.Selection.Text;
-
+                
                 rtfBox = rtfBox.Replace(StrToReplace, replacementStr);
                 MainTextBox.Selection.Text = rtfBox;
             }
@@ -528,7 +530,7 @@ namespace CSC_Proj
             
 
             // Clear InputBox.
-            InputTextBox1.Text = String.Empty;
+            InputTextBox2.Text = String.Empty;
         }
 
         private void NoButton_Click(object sender, RoutedEventArgs e)
@@ -539,7 +541,7 @@ namespace CSC_Proj
             // Clear InputBox.
             InputTextBox1.Text = String.Empty;
         }
-
+        #endregion
 
         #endregion
 
@@ -712,24 +714,5 @@ namespace CSC_Proj
         }
         #endregion
 
-        private void MenuItem_Click_Hyperlink(object sender, RoutedEventArgs e)
-        {
-        //   // MainTextBox.SelectAll();
-           
-        //   // string rtfBox = MainTextBox.Selection.Text;
-        //   //MainTextBox.text
-
-
-
-        //         MainTextBox.Text = "This is some text with a hyperlink in it.";
-        //    // Create hyperlink
-        //    int pos = _rtb.Text.IndexOf("hyperlink");
-        //    MainTextBox.Select(pos, 9);
-        //    var uri = new Uri("http://www.componentone.com", UriKind.Absolute);
-        //    MainTextBox.Selection.MakeHyperlink(uri);
-        //    // Handle navigation requests
-        //    MainTextBox.NavigationMode = NavigationMode.OnControlKey;
-        //    MainTextBox.RequestNavigate += _rtb_RequestNavigate;
-        }
     }
 }
