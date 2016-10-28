@@ -32,14 +32,16 @@
             </MenuItem>
             
             <MenuItem Header="Format">
-                <MenuItem Header="Font" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Font"/>
-                <MenuItem Header="Colour" HorizontalAlignment="Left" Width="140" Click="MenuItem_Click_Colour"/>
+                <MenuItem Header="Font" HorizontalAlignment="Left" Width="150" Click="MenuItem_Click_Font"/>
+                <MenuItem Header="Colour" HorizontalAlignment="Left" Width="150" Click="MenuItem_Click_Colour"/>
+                <MenuItem Header="Insert Bullets" HorizontalAlignment="Left" Click="MenuItem_Click_Bullets"/>
+                <MenuItem Header="Replace All" HorizontalAlignment="Left" Click="MenuItem_Click_ReplaceAll"/>
             </MenuItem>
             <MenuItem Header="Review">
                 <MenuItem Header="Word Count" HorizontalAlignment="Left" Width="180" Click="MenuItem_Click_WordCount"/>
                 <MenuItem Header="Character Count" HorizontalAlignment="Left" Width="180" Click="MenuItem_Click_CharCount"/>
-                <MenuItem Header="Timer" HorizontalAlignment="Left" Width="180" Click="MenuItem_Click_Time"/>
                 <MenuItem Header="Typing Rate" HorizontalAlignment="Left" Width="180" Click="MenuItem_Click_Rate"/>
+                <MenuItem Header="Timer" HorizontalAlignment="Left" Width="180" Click="MenuItem_Click_Time"/>
             </MenuItem>
             <MenuItem Header="Web" Click="OpenWebBrower"/>
         </Menu>
@@ -47,6 +49,49 @@
             <FlowDocument/>
         </RichTextBox>
         <TextBox x:Name="txt__label"   HorizontalAlignment="Left" Margin="0,29,0,10" TextWrapping="Wrap" Text="1&#xD;&#xA;&#xD;&#xA;" Width="30" IsEnabled="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+
+        <Grid x:Name="InputBox1" Visibility="Collapsed">
+            <Grid Background="Black" Opacity="0.5"/>
+            <Border
+            MinWidth="250"
+            Background="White" 
+            BorderBrush="Black" 
+            BorderThickness="1" 
+            CornerRadius="0,55,0,55" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Margin="5" Text="String To Replace:" FontWeight="Bold" FontFamily="Cambria" />
+                    <TextBox MinWidth="150" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="InputTextBox1"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="YesButton1" Margin="5" Content="Yes" Background="{x:Null}" Click="YesButton_Click1"/>
+                        <Button x:Name="NoButton1" Margin="5" Content="No" Background="{x:Null}" Click="NoButton_Click" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid x:Name="InputBox2" Visibility="Collapsed">
+            <Grid Background="Black" Opacity="0.5"/>
+            <Border
+            MinWidth="250"
+            Background="White" 
+            BorderBrush="Black" 
+            BorderThickness="1" 
+            CornerRadius="0,55,0,55" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Margin="5" Text="Replacement String" FontWeight="Bold" FontFamily="Cambria" />
+                    <TextBox MinWidth="150" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="InputTextBox2"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="YesButton" Margin="5" Content="Yes" Background="{x:Null}" Click="YesButton_Click2"/>
+                        <Button x:Name="NoButton" Margin="5" Content="No" Background="{x:Null}" Click="NoButton_Click" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+
 
     </Grid>
 </Window>

@@ -143,7 +143,6 @@ namespace CSC_Proj
 
         #region File Menu Items
         //Luke made all of these except for the print function which Sven did.
-
         private void MenuItem_Click_New(object sender, RoutedEventArgs e)
         {
             clear();
@@ -153,6 +152,29 @@ namespace CSC_Proj
         {
             MainTextBox.SelectAll();
             string rtfBox = MainTextBox.Selection.Text;
+
+            if (filePath == "")
+            {
+                SaveFileDialog saveFile = new SaveFileDialog();
+                saveFile.Filter = "Text Files (.txt)|*.txt|Rich Text Files(.rtf)|*.rtf|All Files (*.*)|*.*";
+                saveFile.Title = "Save file...";
+
+                // Call the ShowDialog method to show the dialog box.
+                bool? userClickedOK = saveFile.ShowDialog();
+
+                if (userClickedOK == true)
+                {
+                    //because rtf.Text isn't a thing
+                    //copies the enitre richtextbox and then saves it as rtfBox because you can't do mainTexBox.Text
+
+                    System.IO.StreamWriter saveAsWrite = new StreamWriter(saveFile.FileName);
+
+                    filePath = saveFile.FileName;
+
+                    saveAsWrite.Write(rtfBox);
+                    saveAsWrite.Close();
+                }
+            }
 
             System.IO.StreamWriter saveWrite = new StreamWriter(filePath);
 
@@ -443,6 +465,82 @@ namespace CSC_Proj
 
         }
 
+        //Luke did this
+        private void MenuItem_Click_Bullets(object sender, RoutedEventArgs e)
+        {
+            string rtfStr = "\u2022 " + MainTextBox.Selection.Text.TrimEnd();
+            rtfStr = rtfStr.Replace("\n", "\n\u2022 ");
+            MainTextBox.Selection.Text = rtfStr;
+        }
+
+        private void MenuItem_Click_ReplaceAll(object sender, RoutedEventArgs e)
+        {
+            InputBox1.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private string strToReplace;
+
+        private void YesButton_Click1(object sender, RoutedEventArgs e)
+        {
+            // YesButton Clicked! Let's hide our InputBox and handle the input text.
+            InputBox1.Visibility = System.Windows.Visibility.Collapsed;
+
+            // Do something with the Input
+            try
+            {
+                string strToReplace = InputTextBox1.Text;         
+            }
+
+            catch (Exception)
+            {
+                MessageBox.Show("Invalid Input");
+            }
+
+            InputBox2.Visibility = System.Windows.Visibility.Visible;
+            
+
+            // Clear InputBox.
+            InputTextBox1.Text = String.Empty;
+        }
+
+        private void YesButton_Click2(object sender, RoutedEventArgs e)
+        {
+            // YesButton Clicked! Let's hide our InputBox and handle the input text.          
+            InputBox2.Visibility = System.Windows.Visibility.Collapsed;
+
+
+            // Do something with the Input
+            try
+            {
+                string replacementStr = InputTextBox2.Text;
+
+                MainTextBox.SelectAll();
+                string rtfBox = MainTextBox.Selection.Text;
+
+                rtfBox = rtfBox.Replace(StrToReplace, replacementStr);
+                MainTextBox.Selection.Text = rtfBox;
+            }
+
+            catch (Exception)
+            {
+                MessageBox.Show("Invalid Input");
+            }
+            
+
+            // Clear InputBox.
+            InputTextBox1.Text = String.Empty;
+        }
+
+        private void NoButton_Click(object sender, RoutedEventArgs e)
+        {
+            // NoButton Clicked! Let's hide our InputBox.
+            InputBox1.Visibility = System.Windows.Visibility.Collapsed;
+
+            // Clear InputBox.
+            InputTextBox1.Text = String.Empty;
+        }
+
+
         #endregion
 
         #region Review Menu Items
@@ -565,21 +663,21 @@ namespace CSC_Proj
             if (minutes == 0)
             {
                 time = (seconds);
-                output = string.Format("You have typed {0} {1} in {2} seconds \n since your {3}.", (words.Count), plural, seconds, repeat);
+                output = string.Format("Since your {3}:\nYou have typed {0} {1} per {2} minutes", (words.Count), plural, seconds, repeat);
 
             }
 
             if (minutes == 1)
             {
                 time = (minutes);
-                output = string.Format("You have typed {0} {1} per minute {2} \n since your {3}.", (words.Count), plural, time, repeat);
+                output = string.Format("Since your {3}:\nYou have typed {0} {1} per {2} minutes", (words.Count), plural, time, repeat);
             }
 
             else if (minutes > 1)
             {
 
                 time = (minutes);
-                output = string.Format("You have typed {0} {1} per {2} minutes  \n since your {3}.", (words.Count), plural, time, repeat);
+                output = string.Format("Since your {3}:\nYou have typed {0} {1} per {2} minutes", (words.Count), plural, time, repeat);
             }
 
 
@@ -593,11 +691,45 @@ namespace CSC_Proj
         #region Web Menu Item
         //Ben did this
         private Browser benTheBrowser;
+
+        public string StrToReplace
+        {
+            get
+            {
+                return strToReplace;
+            }
+
+            set
+            {
+                strToReplace = value;
+            }
+        }
+
         public void OpenWebBrower(object sender, RoutedEventArgs e)
         {
             benTheBrowser = new Browser();
             benTheBrowser.Visibility = Visibility.Visible;
         }
         #endregion
+
+        private void MenuItem_Click_Hyperlink(object sender, RoutedEventArgs e)
+        {
+        //   // MainTextBox.SelectAll();
+           
+        //   // string rtfBox = MainTextBox.Selection.Text;
+        //   //MainTextBox.text
+
+
+
+        //         MainTextBox.Text = "This is some text with a hyperlink in it.";
+        //    // Create hyperlink
+        //    int pos = _rtb.Text.IndexOf("hyperlink");
+        //    MainTextBox.Select(pos, 9);
+        //    var uri = new Uri("http://www.componentone.com", UriKind.Absolute);
+        //    MainTextBox.Selection.MakeHyperlink(uri);
+        //    // Handle navigation requests
+        //    MainTextBox.NavigationMode = NavigationMode.OnControlKey;
+        //    MainTextBox.RequestNavigate += _rtb_RequestNavigate;
+        }
     }
 }
